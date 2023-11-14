@@ -3,22 +3,122 @@
  */
 package de.buw.i2p;
 
+
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.paint.*;
+import javafx.scene.canvas.*;
 
+import java.io.IOException;
 public class App extends Application {
 
     @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+
+    public void start(Stage stage) throws IOException {
+
+        //Mandala s  = new Mandala();
+
+        ImageView generator_image = new ImageView("C:/Users/Hauptnutzer/Uni/IdeaProjects/Generator.jpg");
+        ImageView start_image = new ImageView("C:/Users/Hauptnutzer/Uni/IdeaProjects/Start.jpg");
+        Font font = Font.font("Century", FontWeight.BOLD, 20);
+
+        Button begin = new Button("Beginne");
+        {
+            begin.setFont(font);
+            begin.setPrefSize(100, 20);
+            //begin.setAlignment(Pos.BOTTOM_CENTER);
+        }
+
+        Button generate = new Button("Generiere");
+        {
+            begin.setFont(font);
+            begin.setPrefSize(229, 115);
+        }
+
+        Canvas canvas = new Canvas(700,700);
+        GraphicsContext picture = canvas.getGraphicsContext2D();{
+            picture.setFill(Color.WHITE);
+            picture.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+            picture.setStroke(Color.YELLOW);
+            picture.strokeOval(100, 100, 50, 70);
+        }
+
+        VBox vBox_start = new VBox(begin);
+        {
+            vBox_start.setPadding(new Insets(0, 100, 92, 0));
+        }
+
+        Button save = new Button("Speichern");
+        {
+            begin.setFont(font);
+            begin.setPrefSize(229, 115);
+        }
+
+        Label first_prop = new Label("Formen");
+        Label second_prop = new Label("secondprop");
+        Label third_prop = new Label("thirdprop");
+
+        Image image = new Image("file:resources/Generator.jpg");
+
+        ChoiceBox<Object> first_item = new ChoiceBox<Object>();
+        {
+            first_item.getItems().add("Kreis");
+            first_item.getItems().add("Rechteck");
+        }
+
+
+        HBox hBox_first = new HBox(5, first_prop, first_item);
+        {
+
+        }
+
+        HBox hBox_second = new HBox(5, second_prop);
+
+        HBox hBox_third = new HBox(5, third_prop);
+
+        VBox vBox_save_generate = new VBox(10, save, generate);
+
+        VBox vBox_leftside = new VBox(100,hBox_first,hBox_second,hBox_third,vBox_save_generate);
+        {
+            vBox_leftside.setPadding(new Insets(0, 10, 92, 0));
+        }
+
+        HBox hBox_desktop = new HBox(110, vBox_leftside, canvas );
+        {
+
+        }
+
+        StackPane start_pane = new StackPane(start_image, vBox_start);
+        Scene start = new Scene(start_pane, 950, 750);
+        StackPane quellenpane = new StackPane(generator_image, hBox_desktop);
+        Scene generator = new Scene(quellenpane, 950, 750);
+
+        EventHandler<ActionEvent> eventHandlerStart  = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                stage.setScene(generator);
+            }
+        };
+
+        begin.setOnAction(eventHandlerStart);
+
+        stage.setScene(start);
+        stage.show(); // Display the stage
+
     }
 
     public static void main(String[] args) {

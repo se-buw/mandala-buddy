@@ -23,6 +23,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 
+import javax.imageio.ImageIO;
 import java.io.IOException;
 public class App extends Application {
 
@@ -32,8 +33,9 @@ public class App extends Application {
 
         //Mandala s  = new Mandala();
 
-        ImageView generator_image = new ImageView("C:/Users/Hauptnutzer/Uni/IdeaProjects/Generator.jpg");
-        ImageView start_image = new ImageView("C:/Users/Hauptnutzer/Uni/IdeaProjects/Start.jpg");
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        ImageView generator_image = new ImageView("Generator.jpg");
+        ImageView start_image = new ImageView("Start.jpg");
         Font font = Font.font("Century", FontWeight.BOLD, 20);
 
         Button begin = new Button("Beginne");

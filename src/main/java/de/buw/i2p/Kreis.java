@@ -8,13 +8,15 @@ import javafx.scene.canvas.*;
 
 public class Kreis extends Composite {
     public void print(GraphicsContext picture){
-        picture.strokeOval(point_x, point_y, radius, radius);
+        picture.setStroke(color_);
+        picture.strokeOval(point_x, point_y, radius_, radius_);
     }
 
     public void rotate(){
 
     }
-    private float radius;
+    private float radius_;
+    private Color color_;
     private float point_x;
     private float point_y;
 

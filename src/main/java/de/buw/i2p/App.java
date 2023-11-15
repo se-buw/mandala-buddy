@@ -5,9 +5,11 @@ package de.buw.i2p;
 
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
+import java.awt.BasicStroke;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -39,69 +42,96 @@ public class App extends Application {
         Font font = Font.font("Century", FontWeight.BOLD, 20);
 
         Button begin = new Button("Beginne");
-        {
-            begin.setFont(font);
-            begin.setPrefSize(100, 20);
-            //begin.setAlignment(Pos.BOTTOM_CENTER);
-        }
+        begin.setFont(font);
+        begin.setPrefSize(200, 80);
 
         Button generate = new Button("Generiere");
         {
-            begin.setFont(font);
-            begin.setPrefSize(229, 115);
-        }
-
-        Canvas canvas = new Canvas(700,700);
-        GraphicsContext picture = canvas.getGraphicsContext2D();{
-            picture.setFill(Color.WHITE);
-            picture.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-            picture.setStroke(Color.YELLOW);
-            picture.strokeOval(100, 100, 50, 70);
-        }
-
-        VBox vBox_start = new VBox(begin);
-        {
-            vBox_start.setPadding(new Insets(0, 100, 92, 0));
+            generate.setFont(font);
+            generate.setPrefSize(229, 30);
         }
 
         Button save = new Button("Speichern");
         {
-            begin.setFont(font);
-            begin.setPrefSize(229, 115);
+            save.setFont(font);
+            save.setPrefSize(229, 30);
         }
 
+        Canvas canvas = new Canvas(700, 700);
+        GraphicsContext picture = canvas.getGraphicsContext2D();
+        {
+            picture.setFill(Color.WHITE);
+            picture.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            picture.setStroke(Color.YELLOW);
+            picture.strokeOval(100, 100, 50, 70);
+            picture.strokeRect(80, 200, 200, 100);
+            picture.strokePolygon(new double[]{45, 76, 54}, new double[]{576, 978, 856}, 3);
+        }
+
+        VBox vBox_start = new VBox();
+        {
+            vBox_start.getChildren().addAll(begin);
+            vBox_start.setAlignment(Pos.BOTTOM_CENTER);
+            vBox_start.setPadding(new Insets(0, 0, 150, 0));
+        }
+
+        Font small_font = Font.font("Arial", FontWeight.BOLD, 15);
         Label first_prop = new Label("Formen");
-        Label second_prop = new Label("secondprop");
-        Label third_prop = new Label("thirdprop");
+        first_prop.setFont(small_font);
+        Label second_prop = new Label("Farbe");
+        second_prop.setFont(small_font);
+        Label third_prop = new Label("Sections");
+        third_prop.setFont(small_font);
 
         Image image = new Image("file:resources/Generator.jpg");
 
-        ChoiceBox<Object> first_item = new ChoiceBox<Object>();
-        {
-            first_item.getItems().add("Kreis");
-            first_item.getItems().add("Rechteck");
-        }
 
+        ChoiceBox<String> first_item = new ChoiceBox<String>();
+        {
+            first_item.getItems().addAll("Kreis", "Rechteck");
+            first_item.setValue("Kreis");
+        }
 
         HBox hBox_first = new HBox(5, first_prop, first_item);
         {
-
+            hBox_first.setAlignment(Pos.BOTTOM_LEFT);
+            hBox_first.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        HBox hBox_second = new HBox(5, second_prop);
+        ChoiceBox<String> second_item = new ChoiceBox<String>();
+        {
+            second_item.getItems().addAll("Schwarz", "Blau", "Rot", "Gelb", "Grün", "zufällig");
+            second_item.setValue("Schwarz");
+        }
+
+        HBox hBox_second = new HBox(5, second_prop, second_item);
+        {
+            hBox_second.setAlignment(Pos.BOTTOM_LEFT);
+            hBox_second.setPadding(new Insets(0, 0, 0, 10));
+        }
 
         HBox hBox_third = new HBox(5, third_prop);
-
-        VBox vBox_save_generate = new VBox(10, save, generate);
-
-        VBox vBox_leftside = new VBox(100,hBox_first,hBox_second,hBox_third,vBox_save_generate);
         {
-            vBox_leftside.setPadding(new Insets(0, 10, 92, 0));
+            hBox_third.setAlignment(Pos.BOTTOM_LEFT);
+            hBox_third.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        HBox hBox_desktop = new HBox(110, vBox_leftside, canvas );
+        VBox vBox_save_generate = new VBox(10, save, generate);
         {
+            vBox_save_generate.setAlignment(Pos.BOTTOM_RIGHT);
+            vBox_save_generate.setPadding(new Insets(0, 2, 0, 0));
+        }
 
+        VBox vBox_leftside = new VBox(100, hBox_first, hBox_second, hBox_third, vBox_save_generate);
+        {
+            vBox_leftside.setAlignment(Pos.BOTTOM_LEFT);
+            vBox_leftside.setPadding(new Insets(0, 0, 25, 0));
+        }
+/////////
+        HBox hBox_desktop = new HBox(5, vBox_leftside, canvas);
+        {
+            hBox_desktop.setAlignment(Pos.BOTTOM_CENTER);
+            hBox_desktop.setPadding(new Insets(0, 0, 25, 0));
         }
 
         StackPane start_pane = new StackPane(start_image, vBox_start);
@@ -109,19 +139,39 @@ public class App extends Application {
         StackPane quellenpane = new StackPane(generator_image, hBox_desktop);
         Scene generator = new Scene(quellenpane, 950, 750);
 
-        EventHandler<ActionEvent> eventHandlerStart  = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> handler_begin  = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                stage.setScene(generator);
+            }
+        };
+        EventHandler<ActionEvent> eventHandlerGenerate  = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                EventHandler_Object first_object = new EventHandler_Object();
+                first_object.auslesen(first_item);
+                EventHandler_Object second_object = new EventHandler_Object();
+                first_object.auslesen(second_item);
+                Mandala mandala = new Mandala(picture, first_object.wert(), second_object.wert());
+            }
+        };
+
+        EventHandler<ActionEvent> eventHandlerSave  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 stage.setScene(generator);
             }
         };
 
-        begin.setOnAction(eventHandlerStart);
+        begin.setOnAction(e -> {stage.setScene(generator);});
+        save.setOnAction(eventHandlerSave);
+        generate.setOnAction(eventHandlerGenerate);
 
         stage.setScene(start);
         stage.show(); // Display the stage
-
     }
+
+
 
     public static void main(String[] args) {
         launch();

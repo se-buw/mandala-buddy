@@ -65,6 +65,9 @@ public class App extends Application {
             picture.setStroke(Color.YELLOW);
             picture.strokeOval(100, 100, 50, 70);
             picture.strokeRect(80, 200, 200, 100);
+
+            Kreis circle = new Kreis(350, 350, 50, Color.BLACK);
+            circle.print(picture);
             picture.strokePolygon(new double[]{45, 76, 54}, new double[]{576, 978, 856}, 3);
         }
 
@@ -127,7 +130,7 @@ public class App extends Application {
             vBox_leftside.setAlignment(Pos.BOTTOM_LEFT);
             vBox_leftside.setPadding(new Insets(0, 0, 25, 0));
         }
-/////////
+
         HBox hBox_desktop = new HBox(5, vBox_leftside, canvas);
         {
             hBox_desktop.setAlignment(Pos.BOTTOM_CENTER);
@@ -148,11 +151,10 @@ public class App extends Application {
         EventHandler<ActionEvent> eventHandlerGenerate  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                EventHandler_Object first_object = new EventHandler_Object();
-                first_object.auslesen(first_item);
-                EventHandler_Object second_object = new EventHandler_Object();
-                first_object.auslesen(second_item);
-                Mandala mandala = new Mandala(picture, first_object.wert(), second_object.wert());
+
+                String first_object = first_item.getValue();
+                String second_object = first_item.getValue();
+                Mandala mandala = new Mandala(picture, first_object, second_object);
             }
         };
 

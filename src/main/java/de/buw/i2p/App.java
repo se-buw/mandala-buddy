@@ -31,7 +31,16 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
 
-        //Mandala s  = new Mandala();
+        /*
+        int num;
+        for (int i = 0; i < 20; i++)
+        {
+            num = (int)(4* Math.random() + 1);
+            System.out.println(num + "\n");
+        }
+        */
+        Mandala m  = new Mandala();
+
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         ImageView generator_image = new ImageView("Generator.jpg");
@@ -58,6 +67,8 @@ public class App extends Application {
             picture.setStroke(Color.YELLOW);
             picture.strokeOval(100, 100, 50, 70);
         }
+        picture.strokeOval(0, 0, 300,300);
+        m.generate(picture, 4);
 
         VBox vBox_start = new VBox(begin);
         {

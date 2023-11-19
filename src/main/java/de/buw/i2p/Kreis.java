@@ -6,6 +6,7 @@ import javafx.scene.canvas.*;
 
 
 public class Kreis extends Composite {
+
     private float radius;
     private float center_x;
     private float center_y;
@@ -20,14 +21,16 @@ public class Kreis extends Composite {
         transparent = trasparent_;
         color = Color.BLACK;
     }
+
     public void print(GraphicsContext picture){
-        picture.strokeOval(center_x, center_y, radius, radius);
+        picture.setStroke(color_);
+        picture.strokeOval(point_x - radius_, point_y - radius_, 2*radius_, 2*radius_);
+
     }
 
     public void rotate(){
 
     }
-
 
 
 }

@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Vector;
 
 public class Mandala {
+
     private Composite shapes;
 
 

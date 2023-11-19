@@ -1,32 +1,36 @@
 
 package de.buw.i2p;
 
-import javafx.util.Pair;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 
 
 public class Kreis extends Composite {
 
-    public Kreis(float x, float y, float r, Color c){
-        this.point_x = x;
-        this.point_y = y;
-        this.radius_ = r;
-        this.color_ = c;
+    private float radius;
+    private float center_x;
+    private float center_y;
+    private Color color;
+    private boolean transparent;
+
+
+    public Kreis(float center_x_, float center_y_, float radius_, boolean trasparent_){
+        center_x = center_x_;
+        center_y = center_y_;
+        radius = radius_;
+        transparent = trasparent_;
+        color = Color.BLACK;
     }
 
     public void print(GraphicsContext picture){
         picture.setStroke(color_);
         picture.strokeOval(point_x - radius_, point_y - radius_, 2*radius_, 2*radius_);
+
     }
 
     public void rotate(){
 
     }
-    private float radius_;
-    private Color color_;
-    private float point_x;
-    private float point_y;
 
 
 }

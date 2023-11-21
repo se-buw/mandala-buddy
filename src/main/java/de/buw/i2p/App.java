@@ -7,9 +7,14 @@ package de.buw.i2p;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,11 +27,23 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
-import java.awt.BasicStroke;
+//import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+
+
 
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import java.io.IOException;
 public class App extends Application {
 
@@ -40,6 +57,12 @@ public class App extends Application {
         ImageView generator_image = new ImageView("Generator.jpg");
         ImageView start_image = new ImageView("Start.jpg");
         Font font = Font.font("Century", FontWeight.BOLD, 20);
+
+        /*
+        diese Datei erstellt das Layout der Anwendung, mit allen darin enthaltenen Elementen
+        */
+
+        //erstellen aller Buttons
 
         Button begin = new Button("Beginne");
         begin.setFont(font);
@@ -57,26 +80,14 @@ public class App extends Application {
             save.setPrefSize(229, 30);
         }
 
+        //erstellen des Canvas, in dem das Mandala generiert wird
+
         Canvas canvas = new Canvas(700, 700);
-        GraphicsContext picture = canvas.getGraphicsContext2D();
-        {
-            picture.setFill(Color.WHITE);
-            picture.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            picture.setStroke(Color.YELLOW);
-            picture.strokeOval(100, 100, 50, 70);
-            picture.strokeRect(80, 200, 200, 100);
+        GraphicsContext gc_canvas = canvas.getGraphicsContext2D();
+        BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gc_buffer = bufferedImage.createGraphics();
 
-            Kreis circle = new Kreis(350, 350, 50, Color.BLACK);
-            circle.print(picture);
-            picture.strokePolygon(new double[]{45, 76, 54}, new double[]{576, 978, 856}, 3);
-        }
-
-        VBox vBox_start = new VBox();
-        {
-            vBox_start.getChildren().addAll(begin);
-            vBox_start.setAlignment(Pos.BOTTOM_CENTER);
-            vBox_start.setPadding(new Insets(0, 0, 150, 0));
-        }
+        //hier werden die Label, für die einzustellenden Faktoren erstellt
 
         Font small_font = Font.font("Arial", FontWeight.BOLD, 15);
         Label first_prop = new Label("Formen");
@@ -88,17 +99,12 @@ public class App extends Application {
 
         Image image = new Image("file:resources/Generator.jpg");
 
+        //hier werden die ChoiceBoxen, in denen der Nutzer seine Auswahl trifft, erstellt
 
         ChoiceBox<String> first_item = new ChoiceBox<String>();
         {
             first_item.getItems().addAll("Kreis", "Rechteck");
             first_item.setValue("Kreis");
-        }
-
-        HBox hBox_first = new HBox(5, first_prop, first_item);
-        {
-            hBox_first.setAlignment(Pos.BOTTOM_LEFT);
-            hBox_first.setPadding(new Insets(0, 0, 0, 10));
         }
 
         ChoiceBox<String> second_item = new ChoiceBox<String>();
@@ -107,19 +113,43 @@ public class App extends Application {
             second_item.setValue("Schwarz");
         }
 
+
+
+
+        //Anordnung der Auswahlelemente und zusammenstellen ALLER Elemente
+
+        VBox vBox_start = new VBox();
+        {
+            vBox_start.getChildren().addAll(begin);
+            vBox_start.setAlignment(Pos.BOTTOM_CENTER);
+            vBox_start.setPadding(new Insets(0, 0, 150, 0));
+        }
+
+        ChoiceBox<String> third_item = new ChoiceBox<String>();
+        {
+            third_item.getItems().addAll("3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+            third_item.setValue("3");
+        }
+
+        HBox hBox_first = new HBox(5, first_prop, first_item);
+        {
+            hBox_first.setAlignment(Pos.BOTTOM_LEFT);
+            hBox_first.setPadding(new Insets(0, 0, 0, 10));
+        }
+
         HBox hBox_second = new HBox(5, second_prop, second_item);
         {
             hBox_second.setAlignment(Pos.BOTTOM_LEFT);
             hBox_second.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        HBox hBox_third = new HBox(5, third_prop);
+        HBox hBox_third = new HBox(5, third_prop, third_item);
         {
             hBox_third.setAlignment(Pos.BOTTOM_LEFT);
             hBox_third.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        VBox vBox_save_generate = new VBox(10, save, generate);
+        VBox vBox_save_generate = new VBox(10, generate, save);
         {
             vBox_save_generate.setAlignment(Pos.BOTTOM_RIGHT);
             vBox_save_generate.setPadding(new Insets(0, 2, 0, 0));
@@ -137,33 +167,62 @@ public class App extends Application {
             hBox_desktop.setPadding(new Insets(0, 0, 25, 0));
         }
 
+        //erstellen der Fenster
+
         StackPane start_pane = new StackPane(start_image, vBox_start);
         Scene start = new Scene(start_pane, 950, 750);
         StackPane quellenpane = new StackPane(generator_image, hBox_desktop);
         Scene generator = new Scene(quellenpane, 950, 750);
+
 
         EventHandler<ActionEvent> handler_begin  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 stage.setScene(generator);
             }
-        };
+        };//dieser Eventhandler zeigt die Mandalaseite, wird vom Beginnenbutton aufgerufen
+
         EventHandler<ActionEvent> eventHandlerGenerate  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
 
                 String first_object = first_item.getValue();
                 String second_object = first_item.getValue();
-                Mandala mandala = new Mandala(picture, first_object, second_object);
+                //Mandala mandala = new Mandala(gc_canvas, gc_buffer, first_object, second_object);
+
+                gc_canvas.setFill(Color.WHITE);
+                gc_canvas.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+                gc_canvas.setStroke(Color.YELLOW);
+                gc_canvas.strokeOval(100, 100, 50, 70);
+                gc_canvas.strokeRect(80, 200, 200, 100);
+
+                gc_buffer.setColor(new java.awt.Color(255, 255, 255));
+                gc_buffer.fillRect(0, 0, 700, 700);
+                gc_buffer.setColor(java.awt.Color.YELLOW);
+                gc_buffer.drawOval(100, 100, 50, 70);
+                gc_buffer.drawRect(80, 200, 200, 100);
+
+                Kreis kreis = new Kreis (350,350, 100);
+                kreis.print(gc_canvas, gc_buffer);
+
+
+                gc_buffer.dispose();
             }
-        };
+        };//in diesem Eventhandler wird das Mandala generiert
 
         EventHandler<ActionEvent> eventHandlerSave  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                stage.setScene(generator);
+
+                try{
+                    File file = new File("mandala_made_by_generator.png");
+                    ImageIO.write(bufferedImage, "png", file);
+                } catch (IOException z) {
+                    z.printStackTrace();
+                }
+
             }
-        };
+        };//in diesem Button wird das aktuelle Mandala gespeichert
 
         begin.setOnAction(e -> {stage.setScene(generator);});
         save.setOnAction(eventHandlerSave);
@@ -171,9 +230,8 @@ public class App extends Application {
 
         stage.setScene(start);
         stage.show(); // Display the stage
+
     }
-
-
 
     public static void main(String[] args) {
         launch();

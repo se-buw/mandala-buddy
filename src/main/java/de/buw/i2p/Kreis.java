@@ -23,8 +23,13 @@ public class Kreis extends Composite {
     }
 
     public void print(GraphicsContext picture){
-        picture.setStroke(color_);
-        picture.strokeOval(point_x - radius_, point_y - radius_, 2*radius_, 2*radius_);
+        picture.setStroke(color);
+        picture.setFill(Color.WHITE);
+        if(!transparent){
+            picture.fillOval(center_x - radius, center_y - radius, 2*radius, 2*radius);
+        }
+        picture.strokeOval(center_x - radius, center_y - radius, 2*radius, 2*radius);
+
 
     }
 

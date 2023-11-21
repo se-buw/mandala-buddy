@@ -14,31 +14,14 @@ public class Composite {
     public Composite(){
         comp_container = new Vector<>();
     }
-    public void print(GraphicsContext picture){
-        System.out.println("Composites print");
-        for (Composite it: comp_container){
-            System.out.println("hi");
-            it.print(picture);
-        }
-    };
 
-    public void rotate(){
-        for (Composite it: comp_container){
-            it.rotate();
-        }
-    };
-
-    public /*static*/ void add(Composite object){
-            comp_container.add(object);
-
-    }
 
     public void generate(int num_segments, String shape){
 
-        Kreis base = new Kreis(350.0f, 350.0f, size/2, true);
+        Kreis base = new Kreis(350.0f, 350.0f, 300.0f, false);
         comp_container.add(base);
         int num = (int)(4* Math.random());
-        generate_2(num_segments);
+        generate_0(num_segments);
         /*
         switch(num){
             case(0):
@@ -56,14 +39,19 @@ public class Composite {
     }
 
     public void generate_0(int num_segments){
+        comp_container.add(new Kreis(350.0f, 350.0f, 125.0f, true));
+        comp_container.add(new Kreis(350.0f, 350.0f, 225.0f, true));
         float center_x;
         float center_y;
-        float radius = (float) ((Math.PI * size/4)/num_segments);
-        float angle = (350.0f/ num_segments);
+        //float radius = 35.0f;
+        float angle = (float)(2* Math.PI/ num_segments);
         for (int i = 0 ; i < num_segments; i++){
-            center_x = 350.0f + (float)(Math.cos(i * angle)*radius);
-            center_y = 350.0f + (float)(Math.sin(i * angle)*radius);
-            comp_container.add(new Kreis(center_x, center_y, radius, false));
+            center_x = 350.0f + (float)(Math.cos(i * angle)*125.0f);
+            center_y = 350.0f + (float)(Math.sin(i * angle)*125.0f);
+            comp_container.add(new Kreis(center_x, center_y, 30.0f, false));
+            center_x = 350.0f + (float)(Math.cos(i * angle)*225.0f);
+            center_y = 350.0f + (float)(Math.sin(i * angle)*225.0f);
+            comp_container.add(new Kreis(center_x, center_y, 50.0f, false));
         }
     }
 
@@ -71,13 +59,13 @@ public class Composite {
         float center_x;
         float center_y;
         float radius =  1.5f*((float)((Math.PI * size/4)/num_segments));
-        float angle = (350.0f/ num_segments);
+        float angle = (float)(2* Math.PI/ num_segments);
     }
 
     public void generate_2(int num_segments){
         float center_x;
         float center_y;
-        float angle = (350.0f/ num_segments);
+        float angle = (float)(2* Math.PI/ num_segments);
         float radius = 125.0f;
         for (int i = 0 ; i < num_segments; i++){
             center_x = 350.0f + (float)(Math.cos(i * angle)* radius);
@@ -85,6 +73,26 @@ public class Composite {
             comp_container.add(new Kreis(center_x, center_y, radius, false));
         }
     }
+
+    public void print(GraphicsContext picture){
+        for (Composite it: comp_container){
+            it.print(picture);
+        }
+    }
+
+    public void rotate(){
+        for (Composite it: comp_container){
+            it.rotate();
+        }
+    }
+
+    public void add(Composite object){
+            comp_container.add(object);
+    }
+
+
+
+
 
 }
 

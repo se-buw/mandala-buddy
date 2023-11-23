@@ -21,7 +21,7 @@ public class Composite {
         Kreis base = new Kreis(350.0f, 350.0f, 300.0f, false);
         comp_container.add(base);
         int num = (int)(4* Math.random());
-        generate_0(num_segments);
+        generate_2(num_segments);
         /*
         switch(num){
             case(0):
@@ -58,8 +58,14 @@ public class Composite {
     public void generate_1(int num_segments){
         float center_x;
         float center_y;
-        float radius =  1.5f*((float)((Math.PI * size/4)/num_segments));
+        //float radius = 800.0f/(float)Math.sqrt((double) num_segments) - 300.0f/num_segments;
+        float radius = 150.0f;
         float angle = (float)(2* Math.PI/ num_segments);
+        for (int i = 0 ; i < num_segments; i++){
+            center_x = 350.0f + (float)(Math.cos(i * angle)* 100.0f);
+            center_y = 350.0f + (float)(Math.sin(i * angle)* 100.0f);
+            comp_container.add(new Kreis(center_x, center_y, radius, true));
+        }
     }
 
     public void generate_2(int num_segments){
@@ -70,7 +76,7 @@ public class Composite {
         for (int i = 0 ; i < num_segments; i++){
             center_x = 350.0f + (float)(Math.cos(i * angle)* radius);
             center_y = 350.0f + (float)(Math.sin(i * angle)*radius);
-            comp_container.add(new Kreis(center_x, center_y, radius, false));
+            comp_container.add(new Kreis(center_x, center_y, radius, true));
         }
     }
 

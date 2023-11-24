@@ -8,7 +8,9 @@ import javafx.scene.canvas.*;
 
 public class Composite {
 
-    float size;
+    float diameter;
+    float center_x;
+    float center_y;
     private Vector<Composite> comp_container;
 
     public Composite(){
@@ -16,12 +18,15 @@ public class Composite {
     }
 
 
-    public void generate(int num_segments, String shape){
+    public void generate(int num_segments, float diameter,float center_x, float center_y, String shape ){
+        this.diameter = diameter;
+        this.center_x = center_x;
+        this.center_y = center_y;
 
-        Kreis base = new Kreis(350.0f, 350.0f, 300.0f, false);
+        Kreis base = new Kreis(center_x, center_y, diameter/2, false);
         comp_container.add(base);
         int num = (int)(4* Math.random());
-        generate_2(num_segments);
+        generate_0(num_segments);
         /*
         switch(num){
             case(0):
@@ -39,19 +44,26 @@ public class Composite {
     }
 
     public void generate_0(int num_segments){
-        comp_container.add(new Kreis(350.0f, 350.0f, 125.0f, true));
-        comp_container.add(new Kreis(350.0f, 350.0f, 225.0f, true));
-        float center_x;
-        float center_y;
-        //float radius = 35.0f;
+        float radius_small = diameter/2 * 0.4f;
+        float radius_big = diameter/2 * 0.75f;
+        comp_container.add(new Kreis(center_x, center_y, radius_small, true));
+        comp_container.add(new Kreis(center_x, center_y, radius_big, true));
+        
+        float element_center_x;
+        float element_center_y;
+        float element_radius_small = diameter/2 * 0.1f;
+        float element_radius_big = diameter/2 * 0.167f;
+
         float angle = (float)(2* Math.PI/ num_segments);
         for (int i = 0 ; i < num_segments; i++){
-            center_x = 350.0f + (float)(Math.cos(i * angle)*125.0f);
-            center_y = 350.0f + (float)(Math.sin(i * angle)*125.0f);
-            comp_container.add(new Kreis(center_x, center_y, 30.0f, false));
-            center_x = 350.0f + (float)(Math.cos(i * angle)*225.0f);
-            center_y = 350.0f + (float)(Math.sin(i * angle)*225.0f);
-            comp_container.add(new Kreis(center_x, center_y, 50.0f, false));
+            element_center_x = 350.0f + (float)(Math.cos(i * angle)*radius_small);
+            element_center_y = 350.0f + (float)(Math.sin(i * angle)*radius_small);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius_small, false));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, 30.0f, 30.0f , false));
+            element_center_x = 350.0f + (float)(Math.cos(i * angle)*radius_big);
+            element_center_y = 350.0f + (float)(Math.sin(i * angle)*radius_big);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius_big, false));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, 50.0f, 50.0f , false));
         }
     }
 
@@ -65,6 +77,7 @@ public class Composite {
             center_x = 350.0f + (float)(Math.cos(i * angle)* 100.0f);
             center_y = 350.0f + (float)(Math.sin(i * angle)* 100.0f);
             comp_container.add(new Kreis(center_x, center_y, radius, true));
+            //comp_container.add(new Quadrat(center_x, center_y, 2 * radius * (float)Math.sin(Math.PI/4.0),2* radius * (float)Math.sin(Math.PI/4.0), true));
         }
     }
 
@@ -77,6 +90,7 @@ public class Composite {
             center_x = 350.0f + (float)(Math.cos(i * angle)* radius);
             center_y = 350.0f + (float)(Math.sin(i * angle)*radius);
             comp_container.add(new Kreis(center_x, center_y, radius, true));
+            //comp_container.add(new Quadrat(center_x, center_y, 2 * radius * (float)Math.sin(Math.PI/4.0),2* radius * (float)Math.sin(Math.PI/4.0),  true));
         }
     }
 

@@ -48,7 +48,7 @@ public class Composite {
         float radius_big = diameter/2 * 0.75f;
         comp_container.add(new Kreis(center_x, center_y, radius_small, true));
         comp_container.add(new Kreis(center_x, center_y, radius_big, true));
-        
+
         float element_center_x;
         float element_center_y;
         float element_radius_small = diameter/2 * 0.1f;
@@ -68,16 +68,17 @@ public class Composite {
     }
 
     public void generate_1(int num_segments){
-        float center_x;
-        float center_y;
-        //float radius = 800.0f/(float)Math.sqrt((double) num_segments) - 300.0f/num_segments;
-        float radius = 150.0f;
+        float radius = diameter/2 * 0.333f;
+
+        float element_center_x;
+        float element_center_y;
+        float element_radius = diameter/4.0f;
         float angle = (float)(2* Math.PI/ num_segments);
         for (int i = 0 ; i < num_segments; i++){
-            center_x = 350.0f + (float)(Math.cos(i * angle)* 100.0f);
-            center_y = 350.0f + (float)(Math.sin(i * angle)* 100.0f);
-            comp_container.add(new Kreis(center_x, center_y, radius, true));
-            //comp_container.add(new Quadrat(center_x, center_y, 2 * radius * (float)Math.sin(Math.PI/4.0),2* radius * (float)Math.sin(Math.PI/4.0), true));
+            element_center_x = 350.0f + (float)(Math.cos(i * angle)* radius);
+            element_center_y = 350.0f + (float)(Math.sin(i * angle)* radius);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, 2 * element_radius * (float)Math.sin(Math.PI/4.0),2* element_radius * (float)Math.sin(Math.PI/4.0), true));
         }
     }
 

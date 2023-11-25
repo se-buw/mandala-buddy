@@ -14,14 +14,10 @@ public class Mandala {
     }
 
     public  void generate(GraphicsContext picture, int num_segments){
-        int num = (int)(4* Math.random() + 1);
-        for (int i = 0; i < num; i++){
-            Composite c = new Composite(600.0f, 350.0f, 350.0f);
-            c.generate(num_segments, 600.0f,350.0f, 350.0f, "Kreis");
-            shapes.add(c);
-        }
+        Composite c = new Composite(600.0f, 350.0f, 350.0f);
+        c.generate(num_segments,  "Kreis");
+        shapes.add(c);
         shapes.print(picture);
 
     }
-    //public  void print(){}
 }

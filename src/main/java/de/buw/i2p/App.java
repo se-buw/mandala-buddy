@@ -37,7 +37,9 @@ public class App extends Application {
 // hier werden auch alle Objekte erstellt und die Oberfläche designt
     public void start(Stage stage) throws IOException {
 
+
 //die Hintergründe werden aus resources geladen
+
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         ImageView generator_image = new ImageView("Generator.jpg");
         ImageView start_image = new ImageView("Start.jpg");
@@ -61,9 +63,11 @@ public class App extends Application {
 
 //es wird ein canvas und ein BufferedImage geladen
         Canvas canvas = new Canvas(700, 700);
+
         GraphicsContext gc_canvas = canvas.getGraphicsContext2D();
         BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
         Graphics2D gc_buffer = bufferedImage.createGraphics();
+
 
 //Label werden erstellt
         Font small_font = Font.font("Arial", FontWeight.BOLD, 15);

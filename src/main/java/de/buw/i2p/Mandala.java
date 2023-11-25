@@ -5,6 +5,7 @@ import java.awt.*;
 
 //die Mandalaklasse wird definiert
 public class Mandala {
+
     private Composite shapes;
 //besitzt ein Composite als Attribut
     public Mandala(){
@@ -20,4 +21,5 @@ public class Mandala {
         }//zum Schluss wird das Composite gezeichnet(auch in die Datei)
         shapes.print(gc_canvas, gc_buffer);
     }
+
 }

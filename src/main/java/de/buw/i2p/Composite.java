@@ -17,6 +17,7 @@ public class Composite {
         comp_container = new Vector<>();
     }
 
+
     public void generate(int num_segments, String shape){
 
         Kreis base = new Kreis(350.0f, 350.0f, 300.0f, false);
@@ -84,6 +85,15 @@ public class Composite {
     public void print(GraphicsContext gc_canvas, Graphics2D gc_buffer){
         for (Composite it: comp_container){
             it.print(gc_canvas, gc_buffer);
+
+  /*
+    public void print(GraphicsContext picture){
+        System.out.println("Composites print");
+        for (Composite it: comp_container){
+            System.out.println("hi");
+            it.print(picture);
+            */
+
         }
     }
 
@@ -91,10 +101,13 @@ public class Composite {
         for (Composite it: comp_container){
             it.rotate();
         }
+
     }
+
 
     public void add(Composite object){
         comp_container.add(object);
     }
+
 }
 

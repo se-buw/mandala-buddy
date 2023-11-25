@@ -1,6 +1,7 @@
 
 package de.buw.i2p;
 
+
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ public class Kreis extends Composite {
     private float radius;
     private float center_x;
     private float center_y;
+
     private Color canvas_color;
 
     private java.awt.Color buffer_color;
@@ -40,6 +42,7 @@ public class Kreis extends Composite {
         gc_buffer.setColor(buffer_color);
         gc_canvas.strokeOval(center_x - radius, center_y - radius, 2*radius, 2*radius);
         gc_buffer.drawOval((int)center_x - (int)radius, (int)center_y - (int)radius, 2*(int)radius, 2*(int)radius);
+
     }
     public void rotate(){
     }

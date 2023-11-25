@@ -35,7 +35,7 @@ public class Composite {
         Kreis base = new Kreis(center_x, center_y, diameter/2, false);
         comp_container.add(base);
         int num = (int)(4* Math.random());
-        generate_1(num_segments);
+        generate_7(num_segments);
         /*
         switch(num){
             case(0):
@@ -88,8 +88,8 @@ public class Composite {
         for (int i = 0 ; i < num_segments; i++){
             element_center_x = center_x + (float)(Math.cos(i * angle)* radius);
             element_center_y = center_y + (float)(Math.sin(i * angle)* radius);
-            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
-            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
+            //comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
+            comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
         }
     }
 
@@ -101,8 +101,8 @@ public class Composite {
         for (int i = 0 ; i < num_segments; i++){
             element_center_x = center_x + (float)(Math.cos(i * angle)* element_radius);
             element_center_y = center_y + (float)(Math.sin(i * angle)*element_radius);
-            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
-            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
+            //comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
+            comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
         }
     }
 
@@ -152,14 +152,44 @@ public class Composite {
         for (int i = 0 ; i < num_segments; i++){
             element_center_x = center_x + (float)(Math.cos((i * angle) + (0.5f * angle))* radius);
             element_center_y = center_y + (float)(Math.sin((i * angle) + (0.5f * angle))* radius);
-            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
-            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
+            //comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
+            comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
         }
 
         Composite comp_inside = new Composite(diameter * 0.75f, center_x, center_y);
-        //comp_inside.generate_2(num_segments);
-        comp_inside.generate_1(num_segments);
+        comp_inside.generate_2(num_segments);
+        //comp_inside.generate_1(num_segments);
         comp_container.add(comp_inside);
+    }
+
+    public void generate_7(int num_segments){
+        float radius_1 = diameter/2 * 0.25f;
+        float radius_2 = diameter/2 * 0.45f;
+        float radius_3 = diameter/2 * 0.75f;
+
+        float angle = (float)(2* Math.PI/ num_segments);
+        float element_radius_1 = diameter/2 * 0.05f;
+        float element_radius_2 = diameter/2 * 0.1f;
+        float element_radius_3 = diameter/2 * 0.15f;
+        float element_center_x;
+        float element_center_y;
+
+        for(int i = 0; i < num_segments; i++){
+            element_center_x = center_x + (float)(Math.cos((i * angle))* radius_1);
+            element_center_y = center_y + (float)(Math.sin((i * angle))* radius_1);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius_1, true));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius_1, true));
+
+            element_center_x = center_x + (float)(Math.cos((i * angle))* radius_2);
+            element_center_y = center_y + (float)(Math.sin((i * angle))* radius_2);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius_2, true));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius_2, true));
+
+            element_center_x = center_x + (float)(Math.cos((i * angle))* radius_3);
+            element_center_y = center_y + (float)(Math.sin((i * angle))* radius_3);
+            comp_container.add(new Kreis(element_center_x, element_center_y, element_radius_3, true));
+            //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius_3, true));
+        }
     }
 
     public void print(GraphicsContext picture){

@@ -4,29 +4,39 @@ package de.buw.i2p;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
 
 public class Quadrat extends Composite {
-    private float corner_x;
-    private float corner_y;
-    private float length;
+    private float center_x;
+    private float center_y;
+    private float height;
     private float width;
+
+    private float radius;
     private Color color;
     private boolean transparent;
 
-    public Quadrat(float corner_x_, float corner_y_, float length_, float width_, boolean trasparent_){
-        corner_x = corner_x_;
-        corner_y = corner_y_;
-        length = length_;
-        width = width_;
-        transparent = trasparent_;
-        color = Color.BLACK;
+
+    public Quadrat(float corner_x, float corner_y, float radius, boolean trasparent){
+        this.center_x = corner_x;
+        this.center_y = corner_y;
+        this.radius = radius;
+        this.transparent = trasparent;
+        this.color = Color.BLACK;
     }
 
     public void print(GraphicsContext picture){
+        float length = 2 * radius * (float)Math.sin(Math.PI/4.0);
 
-        picture.strokeRect(corner_x, corner_y, width, length );
-    };
+        picture.setStroke(color);
+        picture.setFill(Color.WHITE);
+        if(!transparent){
+            picture.fillRect(center_x - (length/2), center_y - (length/2), length, length);
+        }
+        picture.strokeRect(center_x - (length/2), center_y - (length/2), length, length);
+
+
+    }
+
 
     public void rotate(){
 

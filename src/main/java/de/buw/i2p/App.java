@@ -82,7 +82,7 @@ public class App extends Application {
 //die ChoiceBoxen werden erstellt
         ChoiceBox<String> first_item = new ChoiceBox<String>();
         {
-            first_item.getItems().addAll("Kreis", "Rechteck");
+            first_item.getItems().addAll("Kreis", "Quadrat");
             first_item.setValue("Kreis");
         }
 
@@ -168,7 +168,7 @@ public class App extends Application {
                 String second_object = first_item.getValue();
 
                 mandala.clear();
-                mandala.generate(gc_canvas, third_item.getValue());
+                mandala.generate(gc_canvas, third_item.getValue(), first_object);
 
             }
         };//mit diesem Button wird ein Mandala generiert und auf das Canvas gezeichnet und in die "Datei"

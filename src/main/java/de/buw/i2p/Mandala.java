@@ -15,9 +15,9 @@ public class Mandala {
 
   
 //in dieser Funktion wird das Mandala generiert indem das Composite erstellt wird und entsprechend Objekte hinzugefügt werden
-    public  void generate(GraphicsContext gc_canvas/*,Graphics2D gc_buffer*/,  int num_segments){
+    public  void generate(GraphicsContext gc_canvas, int num_segments, String shape){
         Composite c = new Composite(600.0f, 350.0f, 350.0f);
-        c.generate(num_segments,  "Kreis");
+        c.generate(num_segments,  shape);
         shapes.add(c);
         shapes.print(gc_canvas);//zum Schluss wird das Composite gezeichnet(auch in die Datei)
     }

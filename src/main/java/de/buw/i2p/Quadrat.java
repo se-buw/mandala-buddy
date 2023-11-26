@@ -47,14 +47,13 @@ public class Quadrat extends Composite {
     public void save(Graphics2D gc_buffer){
         float length = 2 * radius * (float)Math.sin(Math.PI/4.0);
 
-        //es werden die Farben gesetzt
-        gc_buffer.setColor(buffer_color);
         if(!transparent){
             gc_buffer.setColor(java.awt.Color.WHITE);
-            gc_buffer.fillRect((int)center_x - (int)radius, (int)center_y - (int)radius, 2*(int)radius, 2*(int)radius);
+            gc_buffer.fillRect((int)(center_x - (length/2)), (int)(center_y - (length/2)), (int)length, (int)length);
         }
         //die Kreise werden gezeichnet
-        gc_buffer.drawRect((int)center_x - (int)radius, (int)center_y - (int)radius, 2*(int)radius, 2*(int)radius);
+        gc_buffer.setColor(buffer_color);
+        gc_buffer.drawRect((int)(center_x - (length/2)), (int)(center_y - (length/2)), (int)length, (int)length);
 
     }
 

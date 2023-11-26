@@ -38,6 +38,7 @@ public class Composite {
 
         comp_container.add(base);
 
+
         double num = (Math.random());
         if(num < 0.5){
             random_body(num_segments);
@@ -48,6 +49,7 @@ public class Composite {
             comp_inside.random_body(num_segments);
             comp_container.add(comp_inside);
         }
+
 
     }
 
@@ -308,22 +310,21 @@ public class Composite {
         comp_container.add(new Kreis(center_x, center_y, diameter/2 * 0.1f, true));
         comp_container.add(new Kreis(center_x, center_y, diameter/2 * 0.125f, true));
     }
-  
-  
 
-   public void print(GraphicsContext gc_canvas, Graphics2D gc_buffer){
-          for (Composite it: comp_container){
-              it.print(gc_canvas, gc_buffer);
-          }
 
-   }
-     
+
     public void print(GraphicsContext picture){
         for (Composite it: comp_container){
             it.print(picture);
         }
     }
 
+    public void save(Graphics2D gc_buffer){
+        for (Composite it: comp_container){
+            it.save(gc_buffer);
+        }
+
+    }
 
     public void rotate(){
         for (Composite it: comp_container){
@@ -334,6 +335,10 @@ public class Composite {
 
     public void add(Composite object){
             comp_container.add(object);
+    }
+
+    public void clear(){
+        comp_container.clear();
     }
 
 }

@@ -37,6 +37,7 @@ public class App extends Application {
 // hier werden auch alle Objekte erstellt und die Oberfläche designt
     public void start(Stage stage) throws IOException {
 
+        Mandala mandala = new Mandala();
 
 //die Hintergründe werden aus resources geladen
 
@@ -62,11 +63,9 @@ public class App extends Application {
         }
 
 //es wird ein canvas und ein BufferedImage geladen
-        Canvas canvas = new Canvas(700, 700);
 
+        Canvas canvas = new Canvas(700, 700);
         GraphicsContext gc_canvas = canvas.getGraphicsContext2D();
-        BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gc_buffer = bufferedImage.createGraphics();
 
 
 //Label werden erstellt
@@ -95,8 +94,8 @@ public class App extends Application {
 
         ChoiceBox<Integer> third_item = new ChoiceBox<Integer>();
         {
-            third_item.getItems().addAll(3, 4,5,6,7,8,9,10,11,12);
-            third_item.setValue(3);
+            third_item.getItems().addAll(4,5,6,7,8,9,10,11,12);
+            third_item.setValue(4);
         }
 
 //die Objekte werden in VBoxen und HBoxen sortiert und in der Oberfläche platziert
@@ -164,22 +163,28 @@ public class App extends Application {
 
                 gc_canvas.setFill(Color.WHITE);
                 gc_canvas.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc_buffer.setColor(new java.awt.Color(255, 255, 255));
-                gc_buffer.fillRect(0, 0, 700, 700);
 
                 String first_object = first_item.getValue();
                 String second_object = first_item.getValue();
 
-                Mandala mandala = new Mandala();
-                mandala.generate(gc_canvas, gc_buffer, third_item.getValue());
+                mandala.clear();
+                mandala.generate(gc_canvas, third_item.getValue());
 
-                gc_buffer.dispose();
             }
         };//mit diesem Button wird ein Mandala generiert und auf das Canvas gezeichnet und in die "Datei"
 
         EventHandler<ActionEvent> eventHandlerSave  = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+
+                BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
+                Graphics2D gc_buffer = bufferedImage.createGraphics();
+                gc_buffer.setColor(new java.awt.Color(255, 255, 255));
+                gc_buffer.fillRect(0, 0, 700, 700);
+
+                mandala.save(gc_buffer);
+
+                gc_buffer.dispose();
 
                 try{
                     File file = new File("mandala_made_by_generator.png");

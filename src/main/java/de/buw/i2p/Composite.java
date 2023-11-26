@@ -1,7 +1,12 @@
 
 package de.buw.i2p;
 import javafx.scene.canvas.GraphicsContext;
+
 import org.checkerframework.checker.units.qual.C;
+
+import javafx.util.Pair;
+
+import java.awt.*;
 
 import java.util.Vector;
 
@@ -16,6 +21,7 @@ public class Composite {
         comp_container = new Vector<>();
     }
 
+
     public Composite(float diameter, float center_x, float center_y){
         this.diameter = diameter;
         this.center_x = center_x;
@@ -24,9 +30,12 @@ public class Composite {
     }
 
 
+
     public void generate(int num_segments, String shape){
 
+
         Kreis base = new Kreis(center_x, center_y, diameter/2, false);
+
         comp_container.add(base);
 
         double num = (Math.random());
@@ -121,6 +130,7 @@ public class Composite {
             random_center(num_segments);
         }
     }
+
 
     public void generate_02(int num_segments){
         float radius_1 = diameter/2 * 0.25f;
@@ -275,6 +285,7 @@ public class Composite {
             element_center_y = center_y + (float)(Math.sin((i * angle) + (0.5f * angle))* radius);
             comp_container.add(new Kreis(element_center_x, element_center_y, element_radius, true));
             //comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
+
         }
 
         /*
@@ -297,23 +308,33 @@ public class Composite {
         comp_container.add(new Kreis(center_x, center_y, diameter/2 * 0.1f, true));
         comp_container.add(new Kreis(center_x, center_y, diameter/2 * 0.125f, true));
     }
+  
+  
 
+   public void print(GraphicsContext gc_canvas, Graphics2D gc_buffer){
+          for (Composite it: comp_container){
+              it.print(gc_canvas, gc_buffer);
+          }
+
+   }
+     
     public void print(GraphicsContext picture){
         for (Composite it: comp_container){
             it.print(picture);
         }
     }
 
+
     public void rotate(){
         for (Composite it: comp_container){
             it.rotate();
         }
+
     }
 
     public void add(Composite object){
             comp_container.add(object);
     }
-
 
 }
 

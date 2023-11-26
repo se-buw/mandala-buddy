@@ -72,10 +72,8 @@ public class App extends Application {
         Font small_font = Font.font("Arial", FontWeight.BOLD, 15);
         Label first_prop = new Label("Formen");
         first_prop.setFont(small_font);
-        Label second_prop = new Label("Farbe");
+        Label second_prop = new Label("Segmente");
         second_prop.setFont(small_font);
-        Label third_prop = new Label("Sections");
-        third_prop.setFont(small_font);
 
         Image image = new Image("file:resources/Generator.jpg");
 
@@ -86,16 +84,11 @@ public class App extends Application {
             first_item.setValue("Kreis");
         }
 
-        ChoiceBox<String> second_item = new ChoiceBox<String>();
-        {
-            second_item.getItems().addAll("Schwarz", "Blau", "Rot", "Gelb", "Grün", "zufällig");
-            second_item.setValue("Schwarz");
-        }
 
-        ChoiceBox<Integer> third_item = new ChoiceBox<Integer>();
+        ChoiceBox<Integer> second_item = new ChoiceBox<Integer>();
         {
-            third_item.getItems().addAll(4,5,6,7,8,9,10,11,12);
-            third_item.setValue(4);
+            second_item.getItems().addAll(4,5,6,7,8,9,10,11,12);
+            second_item.setValue(4);
         }
 
 //die Objekte werden in VBoxen und HBoxen sortiert und in der Oberfläche platziert
@@ -106,22 +99,16 @@ public class App extends Application {
             vBox_start.setPadding(new Insets(0, 0, 150, 0));
         }
 
-        HBox hBox_first = new HBox(5, first_prop, first_item);
+        HBox hBox_first = new HBox(15, first_prop, first_item);
         {
             hBox_first.setAlignment(Pos.BOTTOM_LEFT);
             hBox_first.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        HBox hBox_second = new HBox(5, second_prop, second_item);
+        HBox hBox_second = new HBox(15, second_prop, second_item);
         {
             hBox_second.setAlignment(Pos.BOTTOM_LEFT);
             hBox_second.setPadding(new Insets(0, 0, 0, 10));
-        }
-
-        HBox hBox_third = new HBox(5, third_prop, third_item);
-        {
-            hBox_third.setAlignment(Pos.BOTTOM_LEFT);
-            hBox_third.setPadding(new Insets(0, 0, 0, 10));
         }
 
         VBox vBox_save_generate = new VBox(10, generate, save);
@@ -130,7 +117,7 @@ public class App extends Application {
             vBox_save_generate.setPadding(new Insets(0, 2, 0, 0));
         }
 
-        VBox vBox_leftside = new VBox(100, hBox_first, hBox_second, hBox_third, vBox_save_generate);
+        VBox vBox_leftside = new VBox(200, hBox_first, hBox_second, vBox_save_generate);
         {
             vBox_leftside.setAlignment(Pos.BOTTOM_LEFT);
             vBox_leftside.setPadding(new Insets(0, 0, 25, 0));
@@ -168,7 +155,7 @@ public class App extends Application {
                 String second_object = first_item.getValue();
 
                 mandala.clear();
-                mandala.generate(gc_canvas, third_item.getValue(), first_object);
+                mandala.generate(gc_canvas, second_item.getValue(), first_object);
 
             }
         };//mit diesem Button wird ein Mandala generiert und auf das Canvas gezeichnet und in die "Datei"

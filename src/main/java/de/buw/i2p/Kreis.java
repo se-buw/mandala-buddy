@@ -9,14 +9,14 @@ import java.awt.*;
 //Definition der Kreisklasse
 public class Kreis extends Composite {
 
-    private float radius;
-    private float center_x;
-    private float center_y;
-    private Color canvas_color;
-    private java.awt.Color buffer_color;
-    private boolean transparent;
+    private float radius;       //radius des Kreises
+    private float center_x;     //x-Koordinate des Mittelpunkt des Kreises
+    private float center_y;     //y-Koordinate des Mittelpunkt des Kreises
+    private Color canvas_color; //Linien Farbe des Kreises für den Canvas
+    private java.awt.Color buffer_color;    //Linien Farbe des Kreises für das zu speichernde Bild
+    private boolean transparent;    //true: nur Umrandung, false: gefüllter Kreis
 
-//die Kreisklasse wird definiert
+
     public Kreis(float center_x, float center_y, float radius, boolean transparent){
         this.center_x = center_x;
         this.center_y = center_y;
@@ -24,17 +24,15 @@ public class Kreis extends Composite {
         this.transparent = transparent;
         canvas_color = Color.BLACK;
         buffer_color = java.awt.Color.BLACK;
-    }//ein Kreis besitzt einen Mittelpunkt, Radius, sowie eine Farbe(eine für canvas, eine für buffer)
+    }
 
-    //in dieser Funktion wird die Printfunktion gezeichnet
-
+    //der Kreis wird auf dem GraphicsContext für den Canvas gezeichnet
     public void print(GraphicsContext gc_canvas){
-        //es werden die Farben gesetzt
-        if(!transparent){
+        if(!transparent){ //falls der Kreis nicht transparent ist, wird der Kreis zuerst gefüllt
             gc_canvas.setFill(Color.WHITE);
             gc_canvas.fillOval(center_x - radius, center_y - radius, 2*radius, 2*radius);
         }
-        //die Kreise werden gezeichnet
+        //danach wird die Umrandung gezeichnet
         gc_canvas.setStroke(canvas_color);
         gc_canvas.strokeOval(center_x - radius, center_y - radius, 2*radius, 2*radius);
 
@@ -42,20 +40,17 @@ public class Kreis extends Composite {
 
     }
 
+    //der Kreis wird auf dem GraphicsContext, der später gespeichert wird, gezeichnet
     public void save(Graphics2D gc_buffer){
-        //es werden die Farben gesetzt
-        //gc_buffer.setColor(buffer_color);
-        if(!transparent){
+        if(!transparent){//falls der Kreis nicht transparent ist, wird der Kreis zuerst gefüllt
             gc_buffer.setColor(java.awt.Color.WHITE);
             gc_buffer.fillOval((int)center_x - (int)radius, (int)center_y - (int)radius, 2*(int)radius, 2*(int)radius);
         }
-        //die Kreise werden gezeichnet
+        //danach wird die Umrandung gezeichnet
         gc_buffer.setColor(buffer_color);
         gc_buffer.drawOval((int)center_x - (int)radius, (int)center_y - (int)radius, 2*(int)radius, 2*(int)radius);
 
     }
 
-    public void rotate(){
-    }
 }
 

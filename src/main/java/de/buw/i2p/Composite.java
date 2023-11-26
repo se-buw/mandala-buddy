@@ -12,16 +12,17 @@ import java.util.Vector;
 
 public class Composite {
 
-    float diameter;
-    float center_x;
-    float center_y;
-    private Vector<Composite> comp_container;
+    float diameter;     //Größe des Composites
+    float center_x;     //x-Koordinate des Mittelpunkt des Composites
+    float center_y;     //y-Koordinate des Mittelpunkt des Composites
+    private Vector<Composite> comp_container;   //Vektor, in dem alle Kinder des Composites gespeichert werden
 
     public Composite(){
         comp_container = new Vector<>();
     }
 
 
+    //ein Composite einer bestimmten Größe, mit einem bestimmten Mittelpunkt wird erzeugt
     public Composite(float diameter, float center_x, float center_y){
         this.diameter = diameter;
         this.center_x = center_x;
@@ -32,20 +33,17 @@ public class Composite {
 
 
     public void generate(int num_segments, String shape){
-
-
         Kreis base = new Kreis(center_x, center_y, diameter/2, false);
+        comp_container.add(base);       //die Grundform des Mandalas wird erstllt und
 
-        comp_container.add(base);
-
-
+        //es wird zufällig entschieden, ob das Mandala eine Bordüre haben soll oder nicht
         double num = (Math.random());
         if(num < 0.5){
-            random_body(num_segments, shape);
+            random_body(num_segments, shape);       //keine Bordüre, nur der Körper
         }
         else{
-            random_border(num_segments, shape);
-            Composite comp_inside = new Composite(diameter * 0.75f, center_x, center_y);
+            random_border(num_segments, shape);     //Bordüre
+            Composite comp_inside = new Composite(diameter * 0.75f, center_x, center_y);    //für den jetzt etwas kleineren Körper wird ein neues Composite erstellt
             comp_inside.random_body(num_segments, shape);
             comp_container.add(comp_inside);
         }
@@ -53,6 +51,7 @@ public class Composite {
 
     }
 
+    //es wird zufällig eine Technik für die Erstellung des Körpers gewählt
     public void random_body(int num_segments, String shape){
         int num = (int)(5* Math.random());
         switch(num){
@@ -74,6 +73,7 @@ public class Composite {
         }
     }
 
+    //es wird zufällig eine Bordüre gewählt
     public void random_border(int num_segments, String shape){
         int num = (int)(4* Math.random());
         switch(num){
@@ -92,6 +92,7 @@ public class Composite {
         }
     }
 
+    //es wird zufällig ein Zentrum gewählt
     public void random_center(int num_segments, String shape){
         int num = (int)(2* Math.random());
         switch(num){
@@ -103,6 +104,8 @@ public class Composite {
                 break;
         }
     }
+
+    //generate_01 bis 05 generieren verschiedene Körper
 
     public void generate_01(int num_segments, String shape){
         float radius_small = diameter/2 * 0.4f;
@@ -132,6 +135,7 @@ public class Composite {
             }
         }
 
+        //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
         double num = Math.random();
         if(num < 0.5 ){
             random_center(num_segments, shape);
@@ -172,6 +176,8 @@ public class Composite {
                 comp_container.add(new Quadrat(element_center_x_3, element_center_y_3, element_radius_3, true));
             }
         }
+
+        //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
         double num = Math.random();
         if(num < 0.5 ){
             random_center(num_segments, shape);
@@ -214,6 +220,8 @@ public class Composite {
             }
 
         }
+
+        //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
         double num = Math.random();
         if(num < 0.5 ){
             random_center(num_segments, shape);
@@ -240,6 +248,8 @@ public class Composite {
                 comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
             }
         }
+
+        //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
         double num = Math.random();
         if(num < 0.5 ){
             random_center(num_segments, shape);
@@ -263,6 +273,8 @@ public class Composite {
             }
         }
     }
+
+    //generate_11 bis 14 generieren verschiedene Bordüren
 
     public void generate_11(int num_segments, String shape){
 
@@ -324,12 +336,10 @@ public class Composite {
             else if(shape.equals("Quadrat")){
                 comp_container.add(new Quadrat(element_center_x, element_center_y, element_radius, true));
             }
-
         }
-
     }
 
-
+    //generate_21 bis 22 erzeugen verschiedene Zentren
 
     public void generate_21(int num_segments, String shape){
         if(shape.equals("Kreis")){
@@ -355,12 +365,14 @@ public class Composite {
 
 
 
+    //alle Elemente des Composites werden auf dem GraphicsContext für den Canvas gezeichnet
     public void print(GraphicsContext picture){
         for (Composite it: comp_container){
             it.print(picture);
         }
     }
 
+    //alle Elemente des Composites werden auf dem GraphicsContext, der später gespeichert wird, gezeichnet
     public void save(Graphics2D gc_buffer){
         for (Composite it: comp_container){
             it.save(gc_buffer);
@@ -368,17 +380,14 @@ public class Composite {
 
     }
 
-    public void rotate(){
-        for (Composite it: comp_container){
-            it.rotate();
-        }
-
-    }
-
+    /*
     public void add(Composite object){
             comp_container.add(object);
     }
+     */
 
+
+    //alle Elemente werden aus dem Composite entfernt
     public void clear(){
         comp_container.clear();
     }

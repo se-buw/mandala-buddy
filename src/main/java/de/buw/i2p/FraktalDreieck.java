@@ -8,12 +8,12 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class FraktalDreieck extends Composite{
     private Vector2D centerPoint;
-    private float radius; //Distanz von der Mitte zu einem Punkt
+    private double radius; //Distanz von der Mitte zu einem Punkt
     private Color canvas_color; //Linien Farbe des Kreises für den Canvas
     private java.awt.Color buffer_color;    //Linien Farbe des Kreises für das zu speichernde Bild
     private int recursionDepth;
 
-    public FraktalDreieck(Vector2D centerPoint, float radius,int recursionDepth){
+    public FraktalDreieck(Vector2D centerPoint, double radius,int recursionDepth){
         this.centerPoint =  centerPoint;
         this.recursionDepth = recursionDepth;
         canvas_color = Color.BLACK;

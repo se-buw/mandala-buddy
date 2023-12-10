@@ -55,6 +55,8 @@ public class Composite {
     //es wird zufällig eine Technik für die Erstellung des Körpers gewählt
     public void random_body(int num_segments, String shape){
         int num = (int)(5* Math.random());
+        generate_01(num_segments, shape); //todo remove
+        /* todo remove this
         switch(num){
             case(0):
                 generate_01(num_segments, shape);
@@ -72,6 +74,7 @@ public class Composite {
                 generate_05(num_segments, shape);
                 break;
         }
+         */
     }
 
     //es wird zufällig eine Bordüre gewählt
@@ -135,6 +138,10 @@ public class Composite {
                 comp_container.add(new Quadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_small, false));
                 comp_container.add(new Quadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_big, false));
             }
+            else if(shape.equals("Dreieck")){
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_1, element_center_y_1), element_radius_small, false, 1, angle));
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_2, element_center_y_2), element_radius_big, false, 1, angle));
+            }
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
@@ -176,6 +183,11 @@ public class Composite {
                 comp_container.add(new Quadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, true));
                 comp_container.add(new Quadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, true));
                 comp_container.add(new Quadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, true));
+            }
+            else if(shape.equals("Dreieck")){
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 1, angle));
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false,  1, angle));
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false,1, angle));
             }
         }
 

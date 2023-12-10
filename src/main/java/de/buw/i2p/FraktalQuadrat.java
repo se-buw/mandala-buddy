@@ -12,19 +12,18 @@ public class FraktalQuadrat extends Composite {
     private Color canvas_color; //Linien Farbe des Kreises für den Canvas
     private java.awt.Color buffer_color;//Linien Farbe des Kreises für das zu speichernde Bild
     private int recursionDepth;
+    private boolean transparent;
 
-    public FraktalQuadrat(Vector2D centerPoint, double radius, int recursionDepth) {
+    public FraktalQuadrat(Vector2D centerPoint, double radius, boolean transparent, int recursionDepth) {
         this.centerPoint = centerPoint;
         this.radius = radius;
         this.recursionDepth = recursionDepth;
+        this.transparent = transparent;
         canvas_color = Color.BLACK;
         buffer_color = java.awt.Color.BLACK;
     }
 
     public void print(GraphicsContext gc_canvas) {
-
-        //todo create subfractals and recursively call the print method on them
-
     }
 
     //das Fraktal wird auf dem GraphicsContext, der später gespeichert wird, gezeichnet

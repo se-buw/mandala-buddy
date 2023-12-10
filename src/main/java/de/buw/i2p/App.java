@@ -80,7 +80,7 @@ public class App extends Application {
 //die ChoiceBoxen werden erstellt
         ChoiceBox<String> first_item = new ChoiceBox<String>();
         {
-            first_item.getItems().addAll("Kreis", "Quadrat", "FraktalDreieck");
+            first_item.getItems().addAll("Kreis", "Quadrat", "FraktalDreieck", "FraktalKreis","FraktalQuadrat");
             first_item.setValue("Kreis");
         }
 

@@ -146,6 +146,10 @@ public class Composite {
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_small, false, 3));
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_big, false, 3 ));
             }
+            else if(shape.equals("FraktalQuadrat")){
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_small, false, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_big, false, 3 ));
+            }
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
@@ -197,7 +201,13 @@ public class Composite {
             }
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, true, 3));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, true, 3 ));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, true, 3));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, true, 3));
+            }
+            else if(shape.equals("FraktalQuadrat")){
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, true, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, true, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, true, 3));
             }
         }
 
@@ -256,6 +266,12 @@ public class Composite {
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, true, 3));
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, true, 3));
             }
+            else if(shape.equals("FraktalQuadrat")){
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_big, true, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_small, true, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, true, 3));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, true, 3));
+            }
 
         }
 
@@ -290,7 +306,9 @@ public class Composite {
             }
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3 ));
+            }
+            else if(shape.equals("FraktalQuadrat")) {
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
             }
         }
 
@@ -322,6 +340,9 @@ public class Composite {
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
             }
+            else if(shape.equals("FraktalQuadrat")) {
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
+            }
         }
     }
 
@@ -350,6 +371,9 @@ public class Composite {
             }
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
+            }
+            else if(shape.equals("FraktalQuadrat")) {
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
             }
         }
     }
@@ -398,6 +422,9 @@ public class Composite {
             }
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
+            }
+            else if(shape.equals("FraktalQuadrat")) {
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3));
             }
         }
     }

@@ -7,7 +7,7 @@ import java.awt.*;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 public class FraktalDreieck extends Composite{
-    private Vector2D centerPoint;
+    private Vector2D center;
     private double radius; //Distanz von der Mitte zu jeder Ecke
     private double rotation;
     private boolean transparent;
@@ -19,8 +19,8 @@ public class FraktalDreieck extends Composite{
     private int recursionDepth;     //wie oft sich das Muster wiederholt
 
 
-    public FraktalDreieck(Vector2D centerPoint, double radius, boolean transparent, int recursionDepth, double rotation){
-        this.centerPoint =  centerPoint;
+    public FraktalDreieck(Vector2D center, double radius, boolean transparent, int recursionDepth, double rotation){
+        this.center =  center;
         this.radius = radius;
         this.transparent = transparent;
         this.recursionDepth = recursionDepth;
@@ -29,9 +29,9 @@ public class FraktalDreieck extends Composite{
         buffer_color = java.awt.Color.BLACK;
         //Ecken werden initialisert(Gleichschenkliges Dreieck mit Winkeln 90° + rotation, 210° + rotation und 330° + rotation)
         //todo mit rotation rumprobieren um dreiecke i  verschiedene richtungen zeigen zu lassen, vor rotation random int zwischen 0 und 1
-        corner0 = new Vector2D(centerPoint.getX() + radius * Math.sin(Math.PI/2 + rotation), centerPoint.getY() + radius * Math.cos(Math.PI/2 + rotation));
-        corner1 = new Vector2D(centerPoint.getX() + radius * Math.sin(7 * Math.PI/6 + rotation), centerPoint.getY() + radius * Math.cos(7 * Math.PI/6 + rotation ));
-        corner2 = new Vector2D(centerPoint.getX() + radius * Math.sin(11 * Math.PI/6 + rotation), centerPoint.getY() + radius * Math.cos(11 * Math.PI/6 + rotation));
+        corner0 = new Vector2D(center.getX() + radius * Math.sin(Math.PI/2 + rotation), center.getY() + radius * Math.cos(Math.PI/2 + rotation));
+        corner1 = new Vector2D(center.getX() + radius * Math.sin(7 * Math.PI/6 + rotation), center.getY() + radius * Math.cos(7 * Math.PI/6 + rotation ));
+        corner2 = new Vector2D(center.getX() + radius * Math.sin(11 * Math.PI/6 + rotation), center.getY() + radius * Math.cos(11 * Math.PI/6 + rotation));
     }
 
     public FraktalDreieck(Vector2D corner0, Vector2D corner1, Vector2D corner2, boolean transparent, int recursionDepth){
@@ -75,14 +75,6 @@ public class FraktalDreieck extends Composite{
     public void save(Graphics2D gc_buffer){
 
     }
-
-    public void rotate(double angle){
-        corner0 = new Vector2D(corner0.getX() * Math.cos(angle)- corner0.getY() * Math.sin(angle), corner0.getX() * Math.sin(angle) + corner0.getY() * Math.cos(angle));
-        corner1 = new Vector2D(corner1.getX() * Math.cos(angle)- corner1.getY() * Math.sin(angle), corner1.getX() * Math.sin(angle) + corner1.getY() * Math.cos(angle));
-        corner2 = new Vector2D(corner2.getX() * Math.cos(angle)- corner2.getY() * Math.sin(angle), corner2.getX() * Math.sin(angle) + corner2.getY() * Math.cos(angle));
-    }
-
-
 }
 
 

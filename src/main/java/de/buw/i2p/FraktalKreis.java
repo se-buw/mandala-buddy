@@ -42,10 +42,10 @@ public class FraktalKreis extends Composite {
         if (recursionDepth > 0) {
             double newRadius = radius / 2.0;
 
-            FraktalKreis sub_fractal0 = new FraktalKreis(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal1 = new FraktalKreis(new Vector2D(center.getX() - newRadius, center.getY()), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal2 = new FraktalKreis(new Vector2D(center.getX(), center.getY() + newRadius), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal3 = new FraktalKreis(new Vector2D(center.getX(), center.getY() - newRadius), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
+            FraktalKreis sub_fractal0 = new FraktalKreis(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal1 = new FraktalKreis(new Vector2D(center.getX() - newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal2 = new FraktalKreis(new Vector2D(center.getX(), center.getY() + newRadius), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal3 = new FraktalKreis(new Vector2D(center.getX(), center.getY() - newRadius), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
 
             sub_fractal0.print(picture);
             sub_fractal1.print(picture);

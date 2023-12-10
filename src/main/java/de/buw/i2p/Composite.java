@@ -218,14 +218,14 @@ public class Composite {
                 comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, true,3, random_rotation * i * angle, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
             }
             else if(shape.equals("FraktalKreis")){
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false, 3, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false, 3, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false, 1, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false, 1, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
             }
             else if(shape.equals("FraktalQuadrat")){
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false, 3, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false, 3, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 2, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false, 2, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false, 2, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
             }
         }
 
@@ -279,16 +279,16 @@ public class Composite {
                 comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, false,3, random_rotation * i * angle, offset_canvas_colors.get(3), offset_buffer_colors.get(3)));
             }
             else if(shape.equals("FraktalKreis")){
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_big, false, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_small, false, 3, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, false, 3, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, false, 3, offset_canvas_colors.get(3), offset_buffer_colors.get(3)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_big, false, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_2, element_center_y_2), element_radius_small, false, 1, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, false, 1, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, false, 1, offset_canvas_colors.get(3), offset_buffer_colors.get(3)));
             }
             else if(shape.equals("FraktalQuadrat")){
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_big, false, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_small, false, 3, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, false, 3, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, false, 3, offset_canvas_colors.get(3), offset_buffer_colors.get(3)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_1, element_center_y_1), element_radius_big, false, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_2, element_center_y_2), element_radius_small, false, 1, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_3, element_center_y_3), element_radius_small, false, 1, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x_4, element_center_y_4), element_radius_small, false, 1, offset_canvas_colors.get(3), offset_buffer_colors.get(3)));
             }
 
         }
@@ -324,10 +324,10 @@ public class Composite {
                 comp_container.add(new FraktalDreieck(new Vector2D(element_center_x, element_center_y), element_radius, true,3, i * angle, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
             }
             else if(shape.equals("FraktalKreis")){
-                comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
             }
             else if(shape.equals("FraktalQuadrat")) {
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
             }
         }
 
@@ -361,7 +361,7 @@ public class Composite {
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x, element_center_y), element_radius, true, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
             }
             else if(shape.equals("FraktalQuadrat")) {
-                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 3, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
+                comp_container.add(new FraktalQuadrat(new Vector2D(element_center_x, element_center_y), element_radius, true, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
             }
         }
     }

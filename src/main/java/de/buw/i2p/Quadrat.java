@@ -16,13 +16,17 @@ public class Quadrat extends Composite {
     private double radius;       //Abstand vom Mittelpunkt des Rechtecks zu einer Ecke
     private Color color;        //Linien Farbe des Quadrats für den Canvas
     private java.awt.Color buffer_color;    //Linien Farbe des Quadrats für das zu speichernde Bild
+    private Color canvas_background;
+    private java.awt.Color buffer_background;
     private boolean transparent;    //true: nur Umrandung, false: gefülltes Quadrat
 
 
-    public Quadrat(Vector2D center, double radius, boolean transparent){
+    public Quadrat(Vector2D center, double radius, boolean transparent, Color canvas_background, java.awt.Color buffer_background){
         this.center = center;
         this.radius = radius;
         this.transparent = transparent;
+        this.canvas_background = canvas_background;
+        this.buffer_background = buffer_background;
         this.color = Color.BLACK;
         buffer_color = java.awt.Color.BLACK;
     }
@@ -32,7 +36,7 @@ public class Quadrat extends Composite {
         double length = 2 * radius * (double)Math.sin(Math.PI/4.0);
 
         if(!transparent){//falls das Quadrat nicht transparent ist, wird das Quadrat zuerst gefüllt
-            picture.setFill(Color.WHITE);
+            picture.setFill(canvas_background);
             picture.fillRect(center.getX() - (length/2), center.getY() - (length/2), length, length);
         }
         //danach wird die Umrandung gezeichnet

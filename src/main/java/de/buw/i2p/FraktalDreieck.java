@@ -14,19 +14,23 @@ public class FraktalDreieck extends Composite{
     private Vector2D corner0;
     private Vector2D corner1;
     private Vector2D corner2;
-    private Color canvas_color; //Linien Farbe des Kreises für den Canvas
-    private java.awt.Color buffer_color;    //Linien Farbe des Kreises für das zu speichernde Bild
+    private Color canvas_stroke_color; //Linien Farbe des Kreises für den Canvas
+    private java.awt.Color buffer_stroke_color;    //Linien Farbe des Kreises für das zu speichernde Bild
+    private Color canvas_background;
+    private java.awt.Color buffer_background;
     private int recursionDepth;     //wie oft sich das Muster wiederholt
 
 
-    public FraktalDreieck(Vector2D center, double radius, boolean transparent, int recursionDepth, double rotation){
+    public FraktalDreieck(Vector2D center, double radius, boolean transparent, int recursionDepth, double rotation, Color canvas_background, java.awt.Color buffer_background){
         this.center =  center;
         this.radius = radius;
         this.transparent = transparent;
         this.recursionDepth = recursionDepth;
         this.rotation = rotation;
-        canvas_color = Color.BLACK;
-        buffer_color = java.awt.Color.BLACK;
+        this.canvas_background = canvas_background;
+        this.buffer_background = buffer_background;
+        canvas_stroke_color = Color.BLACK;
+        buffer_stroke_color = java.awt.Color.BLACK;
         //Ecken werden initialisert(Gleichschenkliges Dreieck mit Winkeln 90° + rotation, 210° + rotation und 330° + rotation)
         //todo mit rotation rumprobieren um dreiecke i  verschiedene richtungen zeigen zu lassen, vor rotation random int zwischen 0 und 1
         corner0 = new Vector2D(center.getX() + radius * Math.sin(Math.PI/2 + rotation), center.getY() + radius * Math.cos(Math.PI/2 + rotation));
@@ -34,12 +38,14 @@ public class FraktalDreieck extends Composite{
         corner2 = new Vector2D(center.getX() + radius * Math.sin(11 * Math.PI/6 + rotation), center.getY() + radius * Math.cos(11 * Math.PI/6 + rotation));
     }
 
-    public FraktalDreieck(Vector2D corner0, Vector2D corner1, Vector2D corner2, boolean transparent, int recursionDepth){
+    public FraktalDreieck(Vector2D corner0, Vector2D corner1, Vector2D corner2, boolean transparent, int recursionDepth, Color canvas_background, java.awt.Color buffer_background){
         this.corner0 = corner0;
         this.corner1 = corner1;
         this.corner2 = corner2;
         this.transparent = transparent;
         this.recursionDepth = recursionDepth;
+        this.canvas_background = canvas_background;
+        this.buffer_background = buffer_background;
     }
 
     //das Fraktal wird auf dem GraphicsContext für den Canvas gezeichnet
@@ -49,18 +55,18 @@ public class FraktalDreieck extends Composite{
 
 
         if(!transparent){
-            picture.setFill(Color.WHITE);
+            picture.setFill(canvas_background);
             picture.fillPolygon(x_points, y_points, 3);
         }
 
         //Umrandung wird gezeichnet
-        picture.setStroke(canvas_color);
+        picture.setStroke(canvas_stroke_color);
         picture.strokePolygon(x_points, y_points, 3);
 
         if(recursionDepth > 0){
-            FraktalDreieck sub_fractal0 = new FraktalDreieck(corner0, corner0.add(0.5, corner1.subtract(corner0)), corner0.add(0.5, corner2.subtract(corner0)), transparent, recursionDepth - 1);
-            FraktalDreieck sub_fractal1 = new FraktalDreieck(corner1.add(0.5, corner0.subtract(corner1)), corner1, corner1.add(0.5, corner2.subtract(corner1)), transparent, recursionDepth - 1);
-            FraktalDreieck sub_fractal2 = new FraktalDreieck(corner2.add(0.5, corner0.subtract(corner2)), corner2.add(0.5, corner1.subtract(corner2)), corner2, transparent, recursionDepth - 1);
+            FraktalDreieck sub_fractal0 = new FraktalDreieck(corner0, corner0.add(0.5, corner1.subtract(corner0)), corner0.add(0.5, corner2.subtract(corner0)), transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalDreieck sub_fractal1 = new FraktalDreieck(corner1.add(0.5, corner0.subtract(corner1)), corner1, corner1.add(0.5, corner2.subtract(corner1)), transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalDreieck sub_fractal2 = new FraktalDreieck(corner2.add(0.5, corner0.subtract(corner2)), corner2.add(0.5, corner1.subtract(corner2)), corner2, transparent, recursionDepth - 1, canvas_background, buffer_background);
 
             sub_fractal0.print(picture);
             sub_fractal1.print(picture);
@@ -73,7 +79,28 @@ public class FraktalDreieck extends Composite{
 
     //das Fraktal wird auf dem GraphicsContext, der später gespeichert wird, gezeichnet
     public void save(Graphics2D gc_buffer){
+        int[] x_points = {(int)corner0.getX(), (int)corner1.getX(), (int)corner2.getX()};
+        int[] y_points = {(int)corner0.getY(), (int)corner1.getY(), (int)corner2.getY()};
 
+
+        if(!transparent){
+            gc_buffer.setColor(buffer_background);
+            gc_buffer.fillPolygon(x_points, y_points, 3);
+        }
+
+        //Umrandung wird gezeichnet
+        gc_buffer.setColor(buffer_stroke_color);
+        gc_buffer.drawPolygon(x_points, y_points, 3);
+
+        if(recursionDepth > 0){
+            FraktalDreieck sub_fractal0 = new FraktalDreieck(corner0, corner0.add(0.5, corner1.subtract(corner0)), corner0.add(0.5, corner2.subtract(corner0)), transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalDreieck sub_fractal1 = new FraktalDreieck(corner1.add(0.5, corner0.subtract(corner1)), corner1, corner1.add(0.5, corner2.subtract(corner1)), transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalDreieck sub_fractal2 = new FraktalDreieck(corner2.add(0.5, corner0.subtract(corner2)), corner2.add(0.5, corner1.subtract(corner2)), corner2, transparent, recursionDepth - 1, canvas_background, buffer_background);
+
+            sub_fractal0.save(gc_buffer);
+            sub_fractal1.save(gc_buffer);
+            sub_fractal2.save(gc_buffer);
+        }
     }
 }
 

@@ -29,9 +29,9 @@ public class FraktalDreieck extends Composite{
         buffer_color = java.awt.Color.BLACK;
         //Ecken werden initialisert(Gleichschenkliges Dreieck mit Winkeln 90° + rotation, 210° + rotation und 330° + rotation)
         //todo mit rotation rumprobieren um dreiecke i  verschiedene richtungen zeigen zu lassen
-        corner0 = new Vector2D(centerPoint.getX() + radius * Math.sin(Math.PI/2 ), centerPoint.getY() + radius * Math.cos(Math.PI/2 ));
-        corner1 = new Vector2D(centerPoint.getX() + radius * Math.sin(7 * Math.PI/6 ), centerPoint.getY() + radius * Math.cos(7 * Math.PI/6 ));
-        corner2 = new Vector2D(centerPoint.getX() + radius * Math.sin(11 * Math.PI/6 ), centerPoint.getY() + radius * Math.cos(11 * Math.PI/6 ));
+        corner0 = new Vector2D(centerPoint.getX() + radius * Math.sin(Math.PI/2 + rotation), centerPoint.getY() + radius * Math.cos(Math.PI/2 + rotation));
+        corner1 = new Vector2D(centerPoint.getX() + radius * Math.sin(7 * Math.PI/6 + rotation), centerPoint.getY() + radius * Math.cos(7 * Math.PI/6 + rotation ));
+        corner2 = new Vector2D(centerPoint.getX() + radius * Math.sin(11 * Math.PI/6 + rotation), centerPoint.getY() + radius * Math.cos(11 * Math.PI/6 + rotation));
     }
 
     //das Fraktal wird auf dem GraphicsContext für den Canvas gezeichnet

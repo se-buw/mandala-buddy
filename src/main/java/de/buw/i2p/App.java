@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -74,6 +75,8 @@ public class App extends Application {
         first_prop.setFont(small_font);
         Label second_prop = new Label("Segmente");
         second_prop.setFont(small_font);
+        Label label_color_picker = new Label("Farbe");
+        label_color_picker.setFont(small_font);
 
         Image image = new Image("file:resources/Generator.jpg");
 
@@ -90,6 +93,8 @@ public class App extends Application {
             second_item.getItems().addAll(4,5,6,7,8,9,10,11,12);
             second_item.setValue(4);
         }
+//Color picker wird erstellt
+        ColorPicker color_picker = new ColorPicker();
 
 //die Objekte werden in VBoxen und HBoxen sortiert und in der Oberfläche platziert
         VBox vBox_start = new VBox();
@@ -111,13 +116,19 @@ public class App extends Application {
             hBox_second.setPadding(new Insets(0, 0, 0, 10));
         }
 
+        HBox hBox_colorpicker = new HBox(15, label_color_picker, color_picker);
+        {
+            hBox_colorpicker.setAlignment(Pos.BOTTOM_LEFT);
+            hBox_second.setPadding(new Insets(0, 0, 0, 10));
+        }
+
         VBox vBox_save_generate = new VBox(10, generate, save);
         {
             vBox_save_generate.setAlignment(Pos.BOTTOM_RIGHT);
             vBox_save_generate.setPadding(new Insets(0, 2, 0, 0));
         }
 
-        VBox vBox_leftside = new VBox(200, hBox_first, hBox_second, vBox_save_generate);
+        VBox vBox_leftside = new VBox(100, hBox_first, hBox_second, hBox_colorpicker, vBox_save_generate);
         {
             vBox_leftside.setAlignment(Pos.BOTTOM_LEFT);
             vBox_leftside.setPadding(new Insets(0, 0, 25, 0));
@@ -155,7 +166,7 @@ public class App extends Application {
                 String second_object = first_item.getValue();
 
                 mandala.clear();
-                mandala.generate(gc_canvas, second_item.getValue(), first_object);
+                mandala.generate(gc_canvas, second_item.getValue(), first_object, color_picker.getValue());
 
             }
         };//mit diesem Button wird ein Mandala generiert und auf das Canvas gezeichnet und in die "Datei"

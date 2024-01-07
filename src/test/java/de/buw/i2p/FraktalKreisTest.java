@@ -2,19 +2,19 @@ package de.buw.i2p;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javafx.scene.paint.Color;
 import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 
-class KreisTest {
+class FraktalKreisTest {
 
-	   @Test
+	 @Test
 	    void testPrintTransparentKreis() {
 	        Vector2D center = new Vector2D(0, 0);
 	        double radius = 5;
@@ -34,9 +34,9 @@ class KreisTest {
 	        // Assertions
 	        assertEquals(Color.BLACK, gcCanvas.getStroke());
 	        assertEquals(Color.AQUA, gcCanvas.getFill());
-
 	    }
-	   @Test
+
+	    @Test
 	    void testPrintFilledKreis() {
 	        Vector2D center = new Vector2D(0, 0);
 	        double radius = 5;
@@ -55,9 +55,9 @@ class KreisTest {
 	        // Assertions
 	        assertEquals(Color.BLACK, gcCanvas.getStroke());
 	        assertEquals(Color.WHITE, gcCanvas.getFill());
-
 	    }
-	   @Test
+
+	    @Test
 	    void testSaveTransparentKreis() {
 	        Vector2D center = new Vector2D(0, 0);
 	        double radius = 5;
@@ -74,7 +74,6 @@ class KreisTest {
 
 	        // Verify that the correct methods were called on the Graphics2D
 	        assertEquals(java.awt.Color.BLACK, gcBuffer.getColor());
-
 	    }
 
 	    @Test
@@ -95,6 +94,5 @@ class KreisTest {
 	        // Verify that the correct methods were called on the Graphics2D
 	        assertEquals(java.awt.Color.BLACK, gcBuffer.getColor());
 	    }
-	   
 
 }

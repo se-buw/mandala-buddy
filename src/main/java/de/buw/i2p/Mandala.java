@@ -8,7 +8,7 @@ import java.awt.*;
 
 //die Mandalaklasse wird definiert
 public class Mandala {
-    private Composite shapes;   //Composite in dem die Formen des Mandalas gespeichert sind
+    protected Composite shapes;   //Composite in dem die Formen des Mandalas gespeichert sind
 
     public Mandala(){
         shapes = new Composite();

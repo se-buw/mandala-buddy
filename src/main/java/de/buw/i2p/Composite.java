@@ -17,12 +17,12 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 public class Composite {
 
     double diameter;     //Größe des Composites
-    private Vector2D center;
-    private Color canvas_background;
-    private java.awt.Color buffer_background;
-    private Vector<Composite> comp_container;   //Vektor, in dem alle Kinder des Composites gespeichert werden
-    private Vector<Color> offset_canvas_colors;
-    private Vector<java.awt.Color> offset_buffer_colors;
+    protected Vector2D center;
+    protected Color canvas_background;
+    protected java.awt.Color buffer_background;
+    protected Vector<Composite> comp_container;   //Vektor, in dem alle Kinder des Composites gespeichert werden
+    protected Vector<Color> offset_canvas_colors;
+    protected Vector<java.awt.Color> offset_buffer_colors;
 
     public Composite(){
         comp_container = new Vector<>();
@@ -69,7 +69,28 @@ public class Composite {
 
 
     }
+    public boolean  generate2(int num_segments, String shape, double num){
+        Kreis base = new Kreis(center, diameter/2, false, canvas_background, buffer_background);
+        comp_container.add(base);       //die Grundform des Mandalas wird erstllt und
 
+        //es wird zufällig entschieden, ob das Mandala eine Bordüre haben soll oder nicht
+        //double num = (Math.random());
+        if(num < 0.5){
+            random_body(num_segments, shape);       //keine Bordüre, nur der Körper
+            return true;
+        }
+        else{
+        	
+            random_border(num_segments, shape);     //Bordüre
+            Composite comp_inside = new Composite(center, diameter * 0.75f, canvas_background, buffer_background);    //für den jetzt etwas kleineren Körper wird ein neues Composite erstellt
+            comp_inside.random_body(num_segments, shape);
+            comp_container.add(comp_inside);
+            return false;
+        }
+
+
+    }
+    
     //es wird zufällig eine Technik für die Erstellung des Körpers gewählt
     public void random_body(int num_segments, String shape){
         int num = (int)(5* Math.random());

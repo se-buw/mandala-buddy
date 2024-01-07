@@ -11,14 +11,14 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 
 public class FraktalKreis extends Composite {
-    private Vector2D center;
-    private double radius;
-    private Color canvas_color; //Linien Farbe des Kreises für den Canvas
-    private java.awt.Color buffer_color;//Linien Farbe des Kreises für das zu speichernde Bild
-    private Color canvas_background;
-    private java.awt.Color buffer_background;
-    private int recursionDepth;
-    private boolean transparent;
+    protected Vector2D center;
+    protected double radius;
+    protected Color canvas_color; //Linien Farbe des Kreises für den Canvas
+    protected java.awt.Color buffer_color;//Linien Farbe des Kreises für das zu speichernde Bild
+    protected Color canvas_background;
+    protected java.awt.Color buffer_background;
+    protected int recursionDepth;
+    protected boolean transparent;
 
     public FraktalKreis(Vector2D center, double radius, boolean transparent, int recursionDepth, Color canvas_background, java.awt.Color buffer_background) {
         this.center = center;

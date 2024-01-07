@@ -37,7 +37,6 @@ class QuadratTest {
         assertEquals(Color.BLACK,picture.getStroke());
         assertEquals(Color.AQUAMARINE,picture.getFill());
 
-        // You can add more assertions based on your requirements
     }
     @Test
     void testPrintFilled() {
@@ -77,7 +76,6 @@ class QuadratTest {
         // Verify that the correct methods were called on the Graphics2D
         assertEquals(java.awt.Color.BLACK, gcBuffer.getColor());
 
-        // You can add more assertions based on your requirements
     }
     @Test
     void testSaveFilledQuadrat() {
@@ -97,7 +95,6 @@ class QuadratTest {
         // Verify that the correct methods were called on the Graphics2D
         assertEquals(java.awt.Color.BLACK, gcBuffer.getColor());
 
-        // You can add more assertions based on your requirements
     }
 }
 

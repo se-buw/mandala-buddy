@@ -63,7 +63,7 @@ class KreisTest {
 	        double radius = 5;
 	        boolean transparent = true;
 	        Color canvasBackground = Color.WHITE;
-	        java.awt.Color bufferBackground = java.awt.Color.BLACK;
+	        java.awt.Color bufferBackground = java.awt.Color.BLUE;
 
 	        Kreis kreis = new Kreis(center, radius, transparent, canvasBackground, bufferBackground);
 

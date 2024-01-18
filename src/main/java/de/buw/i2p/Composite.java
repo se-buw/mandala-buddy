@@ -235,8 +235,8 @@ public class Composite {
             }
             else if(shape.equals("FraktalDreieck")){
                 comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 3, random_rotation * i * angle, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));
-                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, true,  3,  random_rotation * i * angle, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
-                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, true,3, random_rotation * i * angle, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_2, element_center_y_2), element_radius_2, false, 3,  random_rotation * i * angle, offset_canvas_colors.get(1), offset_buffer_colors.get(1)));
+                comp_container.add(new FraktalDreieck(new Vector2D(element_center_x_3, element_center_y_3), element_radius_3, false,3, random_rotation * i * angle, offset_canvas_colors.get(2), offset_buffer_colors.get(2)));
             }
             else if(shape.equals("FraktalKreis")){
                 comp_container.add(new FraktalKreis(new Vector2D(element_center_x_1, element_center_y_1), element_radius_1, false, 1, offset_canvas_colors.get(0), offset_buffer_colors.get(0)));

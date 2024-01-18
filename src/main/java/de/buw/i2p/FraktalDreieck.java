@@ -55,8 +55,8 @@ public class FraktalDreieck extends Composite{
 
 
         if(!transparent){
-            picture.setFill(canvas_background);
-            picture.fillPolygon(x_points, y_points, 3);
+        	picture.setFill(canvas_background);
+        	picture.fillPolygon(x_points, y_points, 3);
         }
 
         //Umrandung wird gezeichnet
@@ -72,7 +72,7 @@ public class FraktalDreieck extends Composite{
             sub_fractal1.print(picture);
             sub_fractal2.print(picture);
         }
-
+       
 
 
     }
@@ -82,16 +82,15 @@ public class FraktalDreieck extends Composite{
         int[] x_points = {(int)corner0.getX(), (int)corner1.getX(), (int)corner2.getX()};
         int[] y_points = {(int)corner0.getY(), (int)corner1.getY(), (int)corner2.getY()};
 
-
-        if(!transparent){
-            gc_buffer.setColor(buffer_background);
-            gc_buffer.fillPolygon(x_points, y_points, 3);
+        // Füllt die Farbe nur in der ersten Rekursionstiefe aus, da die anderen Dreiecke innerhalb des obersten liegen
+        if(!transparent && recursionDepth == 3){
+        	gc_buffer.setColor(buffer_background);
+        	gc_buffer.fillPolygon(x_points, y_points, 3);
         }
-
-        //Umrandung wird gezeichnet
         gc_buffer.setColor(buffer_stroke_color);
         gc_buffer.drawPolygon(x_points, y_points, 3);
-
+        
+        // Weitere Rekursion, wenn Rekursionstiefe noch nicht erreicht wurde
         if(recursionDepth > 0){
             FraktalDreieck sub_fractal0 = new FraktalDreieck(corner0, corner0.add(0.5, corner1.subtract(corner0)), corner0.add(0.5, corner2.subtract(corner0)), transparent, recursionDepth - 1, canvas_background, buffer_background);
             FraktalDreieck sub_fractal1 = new FraktalDreieck(corner1.add(0.5, corner0.subtract(corner1)), corner1, corner1.add(0.5, corner2.subtract(corner1)), transparent, recursionDepth - 1, canvas_background, buffer_background);

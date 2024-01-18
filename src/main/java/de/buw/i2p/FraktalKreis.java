@@ -61,16 +61,16 @@ public class FraktalKreis extends Composite {
             gc_buffer.fillOval((int)(center.getX() - radius), (int)(center.getY() - radius), (int)(2 * radius), (int)(2 * radius));
         }
         //danach wird die Umrandung gezeichnet
-        gc_buffer.setColor(buffer_background);
+        gc_buffer.setColor(buffer_color);
         gc_buffer.drawOval((int)(center.getX() - radius), (int)(center.getY() - radius), (int)(2 * radius), (int)(2 * radius));
 
         if (recursionDepth > 0) {
             double newRadius = radius / 2.0;
 
-            FraktalKreis sub_fractal0 = new FraktalKreis(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal1 = new FraktalKreis(new Vector2D(center.getX() - newRadius, center.getY()), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal2 = new FraktalKreis(new Vector2D(center.getX(), center.getY() + newRadius), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
-            FraktalKreis sub_fractal3 = new FraktalKreis(new Vector2D(center.getX(), center.getY() - newRadius), newRadius, transparent, recursionDepth - 3, canvas_background, buffer_background);
+            FraktalKreis sub_fractal0 = new FraktalKreis(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal1 = new FraktalKreis(new Vector2D(center.getX() - newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal2 = new FraktalKreis(new Vector2D(center.getX(), center.getY() + newRadius), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
+            FraktalKreis sub_fractal3 = new FraktalKreis(new Vector2D(center.getX(), center.getY() - newRadius), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
 
             sub_fractal0.save(gc_buffer);
             sub_fractal1.save(gc_buffer);

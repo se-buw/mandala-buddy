@@ -178,7 +178,7 @@ public class App extends Application {
                 BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
                 Graphics2D gc_buffer = bufferedImage.createGraphics();
                 gc_buffer.setColor(new java.awt.Color(255, 255, 255));
-                gc_buffer.fillRect(0, 0, 700, 700);
+                gc_buffer.fillRect(0, 0, 700, 700); // TODO
 
                 mandala.save(gc_buffer);
 

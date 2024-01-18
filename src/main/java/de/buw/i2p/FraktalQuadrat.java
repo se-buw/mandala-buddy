@@ -37,6 +37,7 @@ public class FraktalQuadrat extends Composite {
         //danach wird die Umrandung gezeichnet
         picture.setStroke(canvas_color);
         picture.strokeRect(center.getX() - (length/2), center.getY() - (length/2), length, length);
+        
         if (recursionDepth > 0) {
             double newRadius = radius / 2.0 ;
             FraktalQuadrat sub_fractal0 = new FraktalQuadrat(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
@@ -61,9 +62,10 @@ public class FraktalQuadrat extends Composite {
             gc_buffer.fillRect((int)(center.getX() - (length/2)), (int)(center.getY() - (length/2)), (int)length, (int)length);
         }
         //danach wird die Umrandung gezeichnet
-        gc_buffer.setColor(buffer_background);
+        gc_buffer.setColor(buffer_color);
         gc_buffer.drawRect((int)(center.getX() - (length/2)), (int)(center.getY() - (length/2)), (int)length, (int)length);
-        if (recursionDepth > 0) {
+        
+        if (recursionDepth > 0 ) {
             double newRadius = radius / 2.0 ;
             FraktalQuadrat sub_fractal0 = new FraktalQuadrat(new Vector2D(center.getX() + newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);
             FraktalQuadrat sub_fractal1 = new FraktalQuadrat(new Vector2D(center.getX() - newRadius, center.getY()), newRadius, transparent, recursionDepth - 1, canvas_background, buffer_background);

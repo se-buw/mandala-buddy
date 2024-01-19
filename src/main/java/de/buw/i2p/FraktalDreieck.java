@@ -21,21 +21,21 @@ public class FraktalDreieck extends Composite{
     private int recursionDepth;     //wie oft sich das Muster wiederholt
 
 
-    public FraktalDreieck(Vector2D center, double radius, boolean transparent, int recursionDepth, double rotation, Color canvas_background, java.awt.Color buffer_background){
+    public FraktalDreieck(Vector2D center, double radius, boolean transparent, int recursionDepth, double rotationin, Color canvas_background, java.awt.Color buffer_background){
         this.center =  center;
         this.radius = radius;
         this.transparent = transparent;
         this.recursionDepth = recursionDepth;
-        this.rotation = rotation;
+        this.rotation = rotationin;
         this.canvas_background = canvas_background;
         this.buffer_background = buffer_background;
         canvas_stroke_color = Color.BLACK;
         buffer_stroke_color = java.awt.Color.BLACK;
         //Ecken werden initialisert(Gleichschenkliges Dreieck mit Winkeln 90° + rotation, 210° + rotation und 330° + rotation)
         //todo mit rotation rumprobieren um dreiecke i  verschiedene richtungen zeigen zu lassen, vor rotation random int zwischen 0 und 1
-        corner0 = new Vector2D(center.getX() + radius * Math.sin(Math.PI/2 + rotation), center.getY() + radius * Math.cos(Math.PI/2 + rotation));
-        corner1 = new Vector2D(center.getX() + radius * Math.sin(7 * Math.PI/6 + rotation), center.getY() + radius * Math.cos(7 * Math.PI/6 + rotation ));
-        corner2 = new Vector2D(center.getX() + radius * Math.sin(11 * Math.PI/6 + rotation), center.getY() + radius * Math.cos(11 * Math.PI/6 + rotation));
+        corner0 = new Vector2D(center.getX() + radius * Math.cos(0 + rotation), center.getY() + radius * Math.sin(0 + rotation));
+        corner1 = new Vector2D(center.getX() + radius * Math.cos(2 * Math.PI/3 + rotation), center.getY() + radius * Math.sin(2 * Math.PI/3 + rotation ));
+        corner2 = new Vector2D(center.getX() + radius * Math.cos(4 * Math.PI/3 + rotation), center.getY() + radius * Math.sin(4 * Math.PI/3 + rotation));
     }
 
     public FraktalDreieck(Vector2D corner0, Vector2D corner1, Vector2D corner2, boolean transparent, int recursionDepth, Color canvas_background, java.awt.Color buffer_background){

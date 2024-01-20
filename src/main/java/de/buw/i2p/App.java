@@ -32,6 +32,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
+	private int mandalaPixelSize = 700;
+	private int mandalaPixelSizeSave = 1440;
 
     @Override
 //die folgende Mainfunktion, führt das Programm aus
@@ -62,6 +64,7 @@ public class App extends Application {
             save.setFont(font);
             save.setPrefSize(229, 30);
         }
+        
 
 //es wird ein canvas und ein BufferedImage geladen
 
@@ -71,13 +74,18 @@ public class App extends Application {
 
 //Label werden erstellt
         Font small_font = Font.font("Arial", FontWeight.BOLD, 15);
+        Font very_small_font = Font.font("Arial", FontWeight.BOLD, 14);
         Label first_prop = new Label("Formen");
         first_prop.setFont(small_font);
         Label second_prop = new Label("Segmente");
         second_prop.setFont(small_font);
         Label label_color_picker = new Label("Farbe");
         label_color_picker.setFont(small_font);
-
+        Label saveFeedback = new Label(" Bild gespeichert als \n mandala_made_by_generator.png");
+        saveFeedback.setFont(very_small_font);
+        saveFeedback.setTextFill(Color.web("#22b54b"));
+        saveFeedback.setVisible(false);
+        
         Image image = new Image("file:resources/Generator.jpg");
 
 //die ChoiceBoxen werden erstellt
@@ -122,7 +130,7 @@ public class App extends Application {
             hBox_second.setPadding(new Insets(0, 0, 0, 10));
         }
 
-        VBox vBox_save_generate = new VBox(10, generate, save);
+        VBox vBox_save_generate = new VBox(10, generate, save, saveFeedback);
         {
             vBox_save_generate.setAlignment(Pos.BOTTOM_RIGHT);
             vBox_save_generate.setPadding(new Insets(0, 2, 0, 0));
@@ -166,8 +174,10 @@ public class App extends Application {
                 String second_object = first_item.getValue();
 
                 mandala.clear();
-                mandala.generate(gc_canvas, second_item.getValue(), first_object, color_picker.getValue());
-
+                mandala.generate(gc_canvas, second_item.getValue(), first_object, color_picker.getValue(), mandalaPixelSize, mandalaPixelSizeSave);
+                
+                // Remove save message
+                saveFeedback.setVisible(false);
             }
         };//mit diesem Button wird ein Mandala generiert und auf das Canvas gezeichnet und in die "Datei"
 
@@ -175,10 +185,10 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent e) {
 
-                BufferedImage bufferedImage = new BufferedImage(700,700,BufferedImage.TYPE_INT_ARGB);
+                BufferedImage bufferedImage = new BufferedImage(mandalaPixelSizeSave,mandalaPixelSizeSave,BufferedImage.TYPE_INT_ARGB);
                 Graphics2D gc_buffer = bufferedImage.createGraphics();
                 gc_buffer.setColor(new java.awt.Color(255, 255, 255));
-                gc_buffer.fillRect(0, 0, 700, 700); // TODO
+                gc_buffer.fillRect(0, 0, mandalaPixelSizeSave, mandalaPixelSizeSave);
 
                 mandala.save(gc_buffer);
 
@@ -190,7 +200,9 @@ public class App extends Application {
                 } catch (IOException z) {
                     z.printStackTrace();
                 }
-
+                
+                // Display save message
+                saveFeedback.setVisible(true);
             }
         };//das Mandala wird gespeichert
 

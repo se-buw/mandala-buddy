@@ -43,7 +43,6 @@ public class Quadrat extends Composite {
 
     //das Quadrat wird auf dem GraphicsContext für den Canvas gezeichnet
     public void print(GraphicsContext picture){
-        double length = 2 * radius * (double)Math.sin(Math.PI/4.0);
         double[] x_points = {rightup.getX(), leftup.getX(), leftdown.getX(), rightdown.getX()};
         double[] y_points = {rightup.getY(), leftup.getY(), leftdown.getY(), rightdown.getY()};
 
@@ -60,7 +59,6 @@ public class Quadrat extends Composite {
 
     //das Quadrat wird auf dem GraphicsContext, der später gespeichert wird, gezeichnet
     public void save(Graphics2D gc_buffer){
-        double length = 2 * radius * (double)Math.sin(Math.PI/4.0);
         int[] x_points = {(int)rightup.getX(), (int)leftup.getX(), (int)leftdown.getX(), (int)rightdown.getX()};
         int[] y_points = {(int)rightup.getY(), (int)leftup.getY(), (int)leftdown.getY(), (int)rightdown.getY()};
 

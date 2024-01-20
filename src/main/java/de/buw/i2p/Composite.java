@@ -23,6 +23,8 @@ public class Composite {
     protected Vector<Composite> comp_container;   //Vektor, in dem alle Kinder des Composites gespeichert werden
     protected Vector<Color> offset_canvas_colors;
     protected Vector<java.awt.Color> offset_buffer_colors;
+    protected Composite innerComposite;
+    protected double[] randomValues;
 
     public Composite(){
         comp_container = new Vector<>();
@@ -47,6 +49,11 @@ public class Composite {
             offset_canvas_colors.add(offset_color_canvas);
             offset_buffer_colors.add(offset_color_buffer);
         }
+        // Set random values
+        randomValues = new double[5];
+        for(int i = 0; i <= 4; ++i) {
+        	randomValues[i] = Math.random();        	
+        }
     }
 
 
@@ -56,19 +63,31 @@ public class Composite {
         comp_container.add(base);       //die Grundform des Mandalas wird erstllt und
 
         //es wird zufällig entschieden, ob das Mandala eine Bordüre haben soll oder nicht
-        double num = (Math.random());
+        double num = randomValues[0];
         if(num < 0.5){
             random_body(num_segments, shape);       //keine Bordüre, nur der Körper
         }
         else{
             random_border(num_segments, shape);     //Bordüre
-            Composite comp_inside = new Composite(center, diameter * 0.75f, canvas_background, buffer_background);    //für den jetzt etwas kleineren Körper wird ein neues Composite erstellt
-            comp_inside.random_body(num_segments, shape);
-            comp_container.add(comp_inside);
+            
+            // Generate innerComposite only if it wasn't generated before, so that previously generated random values do not get reset
+            if(innerComposite == null) {
+            	innerComposite = new Composite(center, diameter * 0.75f, canvas_background, buffer_background);    //für den jetzt etwas kleineren Körper wird ein neues Composite erstellt
+            }
+            // change resolution for saving
+            else {
+            	innerComposite.setCenter(center);
+            	innerComposite.setDiameter(diameter * 0.75f);
+            	innerComposite.deleteComp_containerContents();
+            }
+            innerComposite.random_body(num_segments, shape);
+            comp_container.add(innerComposite);
         }
 
 
     }
+    // Funktion wird nicht genutzt?
+    /*
     public boolean  generate2(int num_segments, String shape, double num){
         Kreis base = new Kreis(center, diameter/2, false, canvas_background, buffer_background);
         comp_container.add(base);       //die Grundform des Mandalas wird erstllt und
@@ -90,10 +109,11 @@ public class Composite {
 
 
     }
+    */
     
     //es wird zufällig eine Technik für die Erstellung des Körpers gewählt
     public void random_body(int num_segments, String shape){
-        int num = (int)(5* Math.random());
+        int num = (int)(5* randomValues[1]);
         switch(num){
             case(0):
                 generate_01(num_segments, shape);
@@ -116,7 +136,7 @@ public class Composite {
 
     //es wird zufällig eine Bordüre gewählt
     public void random_border(int num_segments, String shape){
-        int num = (int)(4* Math.random());
+        int num = (int)(4* randomValues[2]);
         switch(num){
             case(0):
                 generate_11(num_segments, shape);
@@ -135,7 +155,7 @@ public class Composite {
 
     //es wird zufällig ein Zentrum gewählt
     public void random_center(int num_segments, String shape){
-        int num = (int)(2* Math.random());
+        int num = (int)(2* randomValues[3]);
         switch(num){
             case(0):
                 generate_21(num_segments, shape);
@@ -158,8 +178,6 @@ public class Composite {
         double element_center_y_1, element_center_y_2;
         double element_radius_small = diameter/2 * 0.1f;
         double element_radius_big = diameter/2 * 0.167f;
-
-        double random_rotation = Math.random();
 
         float angle = (float)(2* Math.PI/ num_segments);
         
@@ -195,7 +213,7 @@ public class Composite {
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
-        double num = Math.random();
+        double num = randomValues[4];
         if(num < 0.5 ){
             random_center(num_segments, shape);
         }
@@ -213,8 +231,6 @@ public class Composite {
         double element_radius_3 = diameter/2 * 0.15f;
         double element_center_x_1, element_center_x_2, element_center_x_3;
         double element_center_y_1, element_center_y_2, element_center_y_3;
-
-        double random_rotation = Math.random();
 
         for(int i = 0; i < num_segments; i++){
             element_center_x_1 = center.getX() + (double)(Math.cos((i * angle))* radius_1);
@@ -254,7 +270,7 @@ public class Composite {
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
-        double num = Math.random();
+        double num = randomValues[4];
         if(num < 0.5 ){
             random_center(num_segments, shape);
         }
@@ -268,8 +284,6 @@ public class Composite {
         double element_radius_big = diameter/2 * 0.15f;
         double element_center_x_1, element_center_x_2, element_center_x_3, element_center_x_4;
         double element_center_y_1, element_center_y_2, element_center_y_3, element_center_y_4;
-
-        double random_rotation = Math.random();
 
         for(int i = 0; i < num_segments; i++){
             element_center_x_1 = center.getX() + (double)(Math.cos((i * angle))* radius_big);
@@ -318,7 +332,7 @@ public class Composite {
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
-        double num = Math.random();
+        double num = randomValues[4];
         if(num < 0.5 ){
             random_center(num_segments, shape);
         }
@@ -356,7 +370,7 @@ public class Composite {
         }
 
         //es wird zufällig entschieden, ob das Mandala ein Zentrum haben soll
-        double num = Math.random();
+        double num = randomValues[4];
         if(num < 0.5 ){
             random_center(num_segments, shape);
         }
@@ -537,6 +551,16 @@ public class Composite {
     public void clear(){
         comp_container.clear();
     }
-
+    
+    // Getter/Setter
+    public void setDiameter(double diameter_in) {
+    	diameter = diameter_in;
+    }
+    public void setCenter(Vector2D center_in) {
+    	center = center_in;
+    }
+    public void deleteComp_containerContents() {
+    	comp_container.clear();
+    }
 }
 

@@ -20,7 +20,7 @@ class FraktalQuadratTest {
 	        Color canvasBackground = Color.WHITE;
 	        java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, canvasBackground, bufferBackground);
+	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, 0, canvasBackground, bufferBackground);
 
 	        Canvas canvas = new Canvas(400, 400);
 
@@ -42,7 +42,7 @@ class FraktalQuadratTest {
 	        Color canvasBackground = Color.WHITE;
 	        java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, canvasBackground, bufferBackground);
+	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, 0, canvasBackground, bufferBackground);
 
 	        Canvas canvas = new Canvas(400, 400);
 
@@ -63,7 +63,7 @@ class FraktalQuadratTest {
 	        Color canvasBackground = Color.WHITE;
 	        java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, canvasBackground, bufferBackground);
+	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, 0, canvasBackground, bufferBackground);
 
 	        BufferedImage bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
 	        Graphics2D gcBuffer = bufferedImage.createGraphics();
@@ -82,7 +82,7 @@ class FraktalQuadratTest {
 	        Color canvasBackground = Color.WHITE;
 	        java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, canvasBackground, bufferBackground);
+	        FraktalQuadrat quadrat = new FraktalQuadrat(center, radius, transparent, 2, 0, canvasBackground, bufferBackground);
 
 	        BufferedImage bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
 	        Graphics2D gcBuffer = bufferedImage.createGraphics();

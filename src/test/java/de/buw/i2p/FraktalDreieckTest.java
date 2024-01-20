@@ -93,7 +93,7 @@ class FraktalDreieckTest {
         dreieck.save(gcBuffer);
 
         // Verify that the correct methods were called on the Graphics2D
-        assertEquals(java.awt.Color.BLACK, gcBuffer.getColor());
+        assertEquals(java.awt.Color.WHITE, gcBuffer.getColor());
     }
 
 }

@@ -24,7 +24,7 @@ class QuadratTest {
          Color canvasBackground = Color.WHITE;
          java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-         Quadrat quadrat = new Quadrat(center, radius, transparent, canvasBackground, bufferBackground);
+         Quadrat quadrat = new Quadrat(center, radius, transparent, 0, canvasBackground, bufferBackground);
 
          Canvas canvas = new Canvas(400, 400);
 
@@ -46,7 +46,7 @@ class QuadratTest {
     	    Color canvasBackground = Color.WHITE;
     	    java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-    	    Quadrat quadrat = new Quadrat(center, radius, transparent, canvasBackground, bufferBackground);
+    	    Quadrat quadrat = new Quadrat(center, radius, transparent, 0, canvasBackground, bufferBackground);
 
     	    Canvas canvas = new Canvas(400, 400);
 
@@ -66,7 +66,7 @@ class QuadratTest {
         Color canvasBackground = Color.WHITE;
         java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-        Quadrat quadrat = new Quadrat(center, radius, transparent, canvasBackground, bufferBackground);
+        Quadrat quadrat = new Quadrat(center, radius, transparent, 0, canvasBackground, bufferBackground);
 
         BufferedImage bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gcBuffer = bufferedImage.createGraphics();
@@ -85,7 +85,7 @@ class QuadratTest {
         Color canvasBackground = Color.WHITE;
         java.awt.Color bufferBackground = java.awt.Color.BLACK;
 
-        Quadrat quadrat = new Quadrat(center, radius, transparent, canvasBackground, bufferBackground);
+        Quadrat quadrat = new Quadrat(center, radius, transparent, 0, canvasBackground, bufferBackground);
 
         BufferedImage bufferedImage = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gcBuffer = bufferedImage.createGraphics();
